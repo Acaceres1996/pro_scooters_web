@@ -1,0 +1,137 @@
+<div class="body">
+    <form [formGroup]="productFG">
+      <div class="editor" style="margin:0px">    
+
+          <div class="row">
+            <div class="subpage-title col-12">Detalles Nuevo Producto</div>
+
+            <div class="form-group " class="styleHalfWidth" >
+                <label class="bold-content" for="Name">Nombre<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                <div class="input-group">
+                    <input type="text"  [formControlName]="'Name'" 
+                    class="form-control" 
+                    id="Name" autocomplete="off" 
+                    placeholder="Nombre" />
+                </div>
+            </div>
+
+            <div class="form-group " class="styleHalfWidth" >
+              <label class="bold-content" for="Description">Descripcion<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+              <div class="input-group">
+                <input type="text"  [formControlName]="'Description'" 
+                  class="form-control" 
+                  id="Description" autocomplete="off" 
+                  placeholder="Descripcion" />
+              </div>
+            </div>
+  
+            <div class="form-group " class="styleHalfWidth" >
+                <label class="bold-content" for="StorePrice">Precio <i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                <div class="input-group">
+                    <input type="number" [formControlName]="'StorePrice'" 
+                    class="form-control" 
+                    id="StorePrice" autocomplete="off" 
+                    placeholder="Precio en Pesos" />
+                </div>
+              </div>
+
+              <div class="form-group " class="styleHalfWidth2" >
+                  <label class="bold-content" for="Long">Largo (cm)<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                  <div class="input-group">
+                    <input type="number" [formControlName]="'Long'" 
+                      class="form-control" 
+                      id="Long" autocomplete="off" 
+                      placeholder="Largo en centimetros" />
+                  </div>
+                </div>
+
+                <div class="form-group " class="styleHalfWidth" >
+                    <label class="bold-content" for="Wide">Ancho (cm)<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                    <div class="input-group">
+                        <input type="number" [formControlName]="'Wide'" 
+                        class="form-control" 
+                        id="Wide" autocomplete="off" 
+                        placeholder="Ancho en centimetros" />
+                    </div>
+                  </div>
+
+
+                  <div class="form-group " class="styleHalfWidth2" >
+                      <label class="bold-content" for="High">Alto (cm)<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                      <div class="input-group">
+                        <input type="number"  [formControlName]="'High'" 
+                          class="form-control" 
+                          id="High" autocomplete="off" 
+                          placeholder="Alto en centimetros" />
+                      </div>
+                    </div>
+
+                    <div class="form-group " class="styleHalfWidth" >
+                        <label class="bold-content" for="Weight">Peso (gramos)<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                        <div class="input-group">
+                            <input type="number" [formControlName]="'Weight'" 
+                            class="form-control" 
+                            id="Weight" autocomplete="off" 
+                            placeholder="Peso en gramos" />
+                        </div>
+                      </div>
+
+                      <div class="form-group " class="styleHalfWidth2" >
+                          <label class="bold-content" for="DeliveryTime">Tiempo de Entrega (min)<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                          <div class="input-group">
+                            <input type="number" [formControlName]="'DeliveryTime'" 
+                              class="form-control" 
+                              id="DeliveryTime" autocomplete="off" 
+                              placeholder="Tiempo Delivery en Minutos" />
+                          </div>
+                        </div>
+
+             
+                        <div class="form-group " class="styleHalfWidth" >
+                                <label class="bold-content" for="CategoryId">Categoria
+                                    <i class="fa fa-asterisk" aria-hidden="true"></i>
+                                </label>
+                                <div class="input-group">
+                                <select
+                                  class="form-control" 
+                                  [formControlName]="'CategoryId'"
+                                  id="CategoryId" autocomplete="off" >
+                                  <option *ngFor="let item of Categories" value="{{item.Id}}"> {{item.Name}}</option>
+                                </select>
+                                </div>
+                        </div>
+
+            <div class="form-group " class="styleHalfWidth" >
+              <label class="bold-content" for="Image">Imágen<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+              <div  >
+                  <input #fileInput class="form-control "
+                    id="Image"
+                    name="imageUrl" 
+                    type="file" 
+                    accept="image/*" 
+                    (change)="handleInputChange($event)" />
+                    <i class="far fa-trash-alt" (click)="resetImage()"></i>
+              </div>
+            </div>
+
+  
+            <div class="form-group styleWidth buttons">
+                <button id="close" type="button" 
+                  class="btn btn-link nav-item nav-link section-header padding-buttons normalButton" 
+                  (click)="closeNew()">
+                    <i class="fas fa-undo" aria-hidden="true"></i>
+                    <span class="ml-2 hide-by-resolution">Cancelar</span>
+                  </button>              
+                <button id="save" [disabled]="saveDisabled" 
+                  type="button" 
+                  class="btn btn-link nav-item nav-link section-header padding-buttons actionButton" 
+                  (click)="saveClicked()">
+                    <i class="far fa-save" aria-hidden="true"></i>
+                    <span class="ml-2 hide-by-resolution">Crear</span>
+                </button>
+            </div>
+          </div>         
+      </div>
+    </form>
+    
+  </div>

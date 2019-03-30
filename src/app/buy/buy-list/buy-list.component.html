@@ -1,0 +1,69 @@
+<section class="form-container">
+  <section class="left-container" [ngClass]="{collapsed : expandCollapse}">
+    <div class="expand" [ngClass]="{collapsed : expandCollapse}">
+      <i *ngIf="!expandCollapse" class="fa fas fa-chevron-circle-left" (click)="expand()"></i>
+      <i *ngIf="expandCollapse" class="fa fas fa-chevron-circle-right" (click)="expand()"></i>
+    </div>
+      <div class="filterTable" *ngIf="!expandCollapse">
+          <div class="filterInput">
+            <input type="text" placeholder="Filtrar por Tienda" [(ngModel)]='filterWord' />
+            <div class="buttonWrapper">
+                <i *ngIf="!filtering" class="fa fa-times-circle" (click)="clearTextBox()"></i>
+                <i *ngIf="filtering" class="fa fa-spinner fa-spin"></i>
+            </div>
+        </div>
+      </div>
+      <ul *ngIf="!expandCollapse">
+        <ng-container  *ngFor="let store of tiendas">
+          <li  (click)="loadBuys(store.Id)" [ngClass]="{selected : tienda && store.Id == tienda.Id}">
+            {{store.Name}}
+          </li>
+        </ng-container>
+      </ul>
+
+      <div class="vertical" *ngIf="expandCollapse">{{tienda.Name}}</div>
+  </section>
+  <section class="form-main-container">
+    <div class="filter">
+          <div class="filterTable">
+              <div class="filterInput">
+                <input type="text" placeholder="Filtrar por estado, direccion o usuario" [(ngModel)]='filterBuys' />
+                <div class="buttonWrapper">
+                    <i *ngIf="!filteringBuy" class="fa fa-times-circle" (click)="clearBuyTextBox()"></i>
+                    <i *ngIf="filteringBuy" class="fa fa-spinner fa-spin"></i>
+                </div>
+            </div>
+          </div>
+      </div>
+      <div class="content-list">
+        <div class="middle-section" *ngIf="buys && buys.length > 0 else no_records">
+            <app-dashboard-radial [values]='buysByState' [title]="'Ordenes por Estado'"></app-dashboard-radial>
+        </div>
+        <div class="cards-list" *ngIf="buys && buys.length > 0 ">
+          <div class="card tiendaSelected " *ngFor="let buy of buys" [style.background-color]="getGraphColor(buy.StateName)">
+              <div class="title"><span>Estado: </span>{{buy?.StateName}} <i class="far fa-edit" (click)="editBuy(buy)"></i></div>
+              <div class="title"><span>Direccion: </span>{{buy?.AddressesValue}}</div>
+              <div class="title"><span>Usuario: </span>{{buy?.Name}}</div>
+              <div class="description"><span>Total: </span>{{buy?.TotalValue}}</div>
+              <div class="description">Hace {{getDateDifference(buy?.Creation)}}</div>
+          </div>
+          <div *ngIf='!loading && showMore && buys && buys.length > 0' class="showMore" (click)="showMoreBuys()">
+            <div>
+                <i class="fa fa-angle-double-down"></i>
+                <a>Descargar más</a>
+            </div>
+        </div>
+        </div>
+      </div>
+    <ng-template #no_records>
+      <div class="noRecords"><span>No hay compras aun</span></div>
+    </ng-template>
+  </section>
+</section>
+
+<app-buy-details
+  *ngIf="showDetails"
+  [buy]="buy"
+  [states]="states"
+  (closeDialog)="closeDialog($event)">
+</app-buy-details>

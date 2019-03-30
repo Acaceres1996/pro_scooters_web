@@ -1,0 +1,186 @@
+<div class="jumbotron">
+  <h1 class="display-3-rew">Productos</h1>
+</div>
+<section class="form-main-container" [ngClass]="{'loading':loading}">
+  <form [formGroup]="storeFG">
+    <div class="form-group " class="styleHalfWidth">
+      <label class="bold-content" for="storeIdselected">Tienda
+        <i class="fa fa-asterisk" aria-hidden="true"></i>
+      </label>
+      <div class="input-group">
+        <select #storeIdselected class="form-control" [formControlName]="'storeIdselected'" id="storeIdselected"
+          autocomplete="off" (change)="loadProducts(storeIdselected.value)">
+          <option *ngFor="let store of tiendas" value="{{store.Id}}"> {{store.Name}}</option>
+        </select>
+      </div>
+    </div>
+  </form>
+
+  <div style="padding:20px;">
+    <button type="button" class="btn btn-info" (click)="newProduct()">Agregar</button>
+  </div>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Descripcion</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Tiempo de entrega</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table-default" *ngFor="let product of products">
+        <td>{{product?.Name}}</td>
+        <td>{{product?.Description}}</td>
+        <td>{{product?.StorePrice}}</td>
+        <td>{{product?.DeliveryTime}}</td>
+        <td><button (click)="addProp(product)" type="button" class="btn btn-sm btn-success">Agregar Propiedad</button></td>
+        <td><button (click)="viewProp(product)" type="button" class="btn btn-sm btn-info">Ver Propiedad</button></td>
+        <td><button (click)="edit(product)" type="button" class="btn btn-sm btn-outline-info">Editar</button></td>
+        <td><button (click)="Delete(product)" type="button" class="btn btn-sm btn-danger">Eliminar</button></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="modal" style="display:inline" tabindex="-1" role="dialog" *ngIf="showEdit">
+  <div class="modal-dialog" role="document">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar Producto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeDialog('')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="subpage-title col-12">
+
+          <div class="form-group">
+            <label class="col-form-label" for="Nombre">Nombre Producto</label>
+            <input type="text" [(ngModel)]="productEdit.Name" class="form-control" placeholder="Nombre Producto" id="Nombre">
+          </div>
+          <div class="form-group">
+            <label class="col-form-label" for="Descripcion">Descripcion Producto</label>
+            <input type="text" [(ngModel)]="productEdit.Description" class="form-control" placeholder="Descripcion Producto" id="Descripcion">
+          </div>
+          <div class="row">
+          <div class="form-group" class="styleHalfWidth" >
+            <label class="col-form-label" for="Long">Largo (cm)</label>
+            <input type="number" [(ngModel)]="productEdit.Long" class="form-control" placeholder="Largo en centimetros" id="Long">
+          </div>
+          <div class="form-group" class="styleHalfWidth2" >
+            <label class="col-form-label" for="Wide">Ancho (cm)</label>
+            <input type="number" [(ngModel)]="productEdit.Wide" class="form-control" placeholder="Ancho en centimetros" id="Wide">
+          </div>
+          <div class="form-group">
+            <label class="col-form-label" for="High">Alto (cm)</label>
+            <input type="number" [(ngModel)]="productEdit.High" class="form-control" placeholder="Alto en centimetros" id="High">
+          </div>
+          <div class="form-group">
+            <label class="col-form-label" for="Weight">Peso (gramos)</label>
+            <input type="number" [(ngModel)]="productEdit.Weight" class="form-control" placeholder="Peso en gramos" id="Weight">
+          </div>
+          <div class="form-group">
+            <label class="col-form-label" for="DeliveryTime">Tiempo Envio en minutos</label>
+            <input type="number" [(ngModel)]="productEdit.DeliveryTime" class="form-control" placeholder="Tiempo Envio en minutos" id="DeliveryTime">
+          </div>
+
+
+            <br>
+          <div class="modal-alert-footer">
+            <button (click)="closeDialog('')" type="button" class="btn btn-danger">
+              Cancelar
+            </button>
+            <button (click)="Update()" [disabled]="saveDisabled" type="button" class="btn btn-success">
+              Actualizar
+            </button>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" style="display:inline" tabindex="-1" role="dialog" *ngIf="showNewProp">
+    <div class="modal-dialog" role="document">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Agregar Propiedad Producto</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeDialog('')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="subpage-title col-12">
+  
+            <div class="form-group">
+              <label class="col-form-label" for="newNameProp">Nombre Propiedad</label>
+              <input type="text" [(ngModel)]="newNameProp" class="form-control" placeholder="Nombre Propiedad" id="newNameProp">
+            </div>
+            <div class="form-group">
+              <label class="col-form-label" for="newPropValue">Valores (separados por , )</label>
+              <input type="text" [(ngModel)]="newPropValue" class="form-control" placeholder="Valores (separados por , )" id="newPropValue">
+            </div>
+
+              <br>
+            <div class="modal-alert-footer">
+              <button (click)="closeDialog('')" type="button" class="btn btn-danger">
+                Cancelar
+              </button>
+              <button (click)="addPropandValues()" [disabled]="saveDisabled" type="button" class="btn btn-success">
+                Actualizar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" style="display:inline" tabindex="-1" role="dialog" *ngIf="showViewProp">
+      <div class="modal-dialog" role="document">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Propiedades Producto</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeDialog('')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="subpage-title col-12">
+    
+                <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Valores</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="table-default" *ngFor="let prop of propertyAndValues">
+                        <td>{{prop?.Name}}</td>
+                        <td>{{prop?.Values}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+  
+                <br>
+              <div class="modal-alert-footer">
+                <button (click)="closeDialog('')" type="button" class="btn btn-danger">
+                  Volver
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

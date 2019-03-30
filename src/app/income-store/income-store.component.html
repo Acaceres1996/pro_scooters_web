@@ -1,0 +1,28 @@
+<div class="jumbotron">
+  <h1 class="display-3-rew">Ganancias</h1>
+</div>
+<section [ngClass]="{'loading':loading}">
+  <div class="content-list">
+    <div class="middle-section" *ngIf="buys && buys.length > 0">
+      <app-dashboard-radial [values]='resultsByTotal' [title]="'Ventas por Tienda'"></app-dashboard-radial>
+    </div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Ventas</th>
+          <th scope="col">Comision</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-default" *ngFor="let item of results">
+          <td>{{item.StoreName}}</td>
+          <td>{{item.Total}}</td>
+          <td>{{item.TotalValue}}</td>
+          <td>{{item.TotalValue * 0.1 | number:'1.2'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

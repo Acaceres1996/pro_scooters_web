@@ -1,0 +1,129 @@
+<div class="jumbotron">
+  <h1 class="display-3-rew">Registro tienda</h1>
+</div>
+<div style="padding:20px;max-width:900px;margin:0 auto;">
+  <div class="card">
+    <form [formGroup]="tiendaFG">
+      <div class="row">
+
+        <div class="form-group " class="styleHalfWidth">
+          <label class="col-form-label" for="nombre">Nombre</label>
+          <div [ngClass]="{'errors': tiendaFG.get('nombre').errors}">
+            <input type="text" [formControlName]="'nombre'" class="form-control " id="nombre" autocomplete="off"
+              placeholder="Nombre" />
+          </div>
+        </div>
+
+        <div class="form-group " class="styleHalfWidth2">
+          <label class="col-form-label" for="url">Url</label>
+          <div [ngClass]="{'errors': tiendaFG.get('url').errors}">
+            <input type="text" [formControlName]="'url'" class="form-control " id="url" autocomplete="off" placeholder="Url Base Subdominio ej: tata" />
+          </div>
+        </div>
+
+        <div class="form-group " class="styleWidth">
+          <label class="col-form-label" for="descripcion">Descripcion</label>
+          <textarea rows="4" [formControlName]="'descripcion'" class="form-control" id="descripcion" autocomplete="off"
+            placeholder="Descripcion"></textarea>
+        </div>
+
+        <div class="form-group " class="styleHalfWidth">
+          <label class="col-form-label" for="mail">Mail</label>
+          <input type="email" [formControlName]="'mail'" class="form-control " id="mail" autocomplete="off" placeholder="Mail" />
+        </div>
+
+        <div class="form-group " class="styleHalfWidth2">
+          <label class="col-form-label" for="telephone">Telefono</label>
+          <input type="tel" [formControlName]="'telephone'" class="form-control " id="telephone" autocomplete="off"
+            placeholder="Telefono Contacto" />
+        </div>
+
+        <div class="form-group " class="styleHalfWidth">
+          <label class="col-form-label" for="latitud">Latitud / Longitud</label>
+          <div style="padding-right: 5px;">
+            <input type="text" [formControlName]="'latitude'" class="form-control " id="latitud" autocomplete="off"
+              placeholder="Latitud" />
+          </div>
+          <div style="padding-left: 5px;">
+            <input type="text" [formControlName]="'longitude'" class="form-control " id="longitud" autocomplete="off"
+              placeholder="Longitud" />
+          </div>
+          <i class="fas fa-globe-americas" (click)="openPickPosition()"></i>
+        </div>
+
+        <div class="form-group " class="styleHalfWidth2">
+          <label class="col-form-label" for="itemId">Rubro</label>
+          <select class="form-control" [formControlName]="'itemId'" id="itemId" autocomplete="off">
+            <!-- Todo: ngOptions -->
+            <option *ngFor="let item of items" value="{{item.Id}}"> {{item.Name}}</option>
+          </select>
+        </div>
+
+
+        <div class="form-group " class="styleHalfWidth">
+          <label for="logo">Logo Tienda</label>
+          <div>
+            <input #fileInput class="form-control-file " id="logo" name="imageUrl" type="file" accept="image/*"
+              (change)="handleInputChange($event)" />
+
+            <!-- <input type="text" [formControlName]="'logo'"
+                      class="form-control "
+                        id="logo" autocomplete="off"
+                        placeholder="Logo" /> -->
+          </div>
+          <i class="far fa-trash-alt" (click)="resetLogo()"></i>
+        </div>
+
+        <div class="form-group " class="styleHalfWidth2">
+          <label class="bold-content" for="pointsByPesoExchange">Puntos Generados por Peso
+          </label>
+          <div>
+            <input type="number" [formControlName]="'pointsByPesoExchange'" class="form-control " id="pointsByPesoExchange"
+              autocomplete="off" placeholder="Puntos" />
+          </div>
+        </div>
+
+        <div class="form-group " class="styleHalfWidth">
+          <label class="bold-content" for="deliveryTimeAverage">Promedio de Entrega (minutos)
+          </label>
+          <div>
+            <input type="number" [formControlName]="'deliveryTimeAverage'" class="form-control " id="deliveryTimeAverage"
+              autocomplete="off" placeholder="Promedio de Entrega en minutos" />
+          </div>
+        </div>
+
+        <div class="form-group " class="styleWidth">
+          <label class="col-form-label" for="delivery">Mecanismos de Delivery</label>
+          <textarea rows="3" [formControlName]="'delivery'" class="form-control" id="delivery" autocomplete="off"
+            placeholder="Mecanismos de Delivery"></textarea>
+        </div>
+
+        <div class="form-group " class="styleHalfWidth">
+            <label class="bold-content" for="shippingArea">Radio Envio en metros
+            </label>
+            <div>
+              <input type="number" [formControlName]="'shippingArea'" class="form-control " id="shippingArea"
+                autocomplete="off" placeholder="Radio Envio en metros" />
+            </div>
+          </div>
+
+        <div class="form-group " class="styleHalfWidth2">
+          <label class="bold-content" for="lookAndFeelId">Estilo
+            <i class="fa fa-asterisk" aria-hidden="true"></i>
+          </label>
+          <div class="input-group">
+            <select class="form-control" [formControlName]="'lookAndFeelId'" id="lookAndFeelId" autocomplete="off">
+              <option *ngFor="let item of lookAndFeelItems" value="{{item.Id}}"> {{item.Name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group styleWidth buttons">
+          <button id="close" type="button" class="btn btn-secondary" (click)="closeNew()">Cancel</button>
+          <button id="save" [disabled]="saveDisabled" type="button" class="btn btn-primary" (click)="saveClicked()">Guardar</button>
+        </div>
+      </div>
+    </form>
+    <app-pick-position *ngIf="pickPosition" [lat]="tiendaFG.get('latitude').value" [lng]="tiendaFG.get('longitude').value"
+      (selectPosition)="setNewLocation($event)" (cancelPicker)="cancelPicker()"></app-pick-position>
+  </div>
+</div>

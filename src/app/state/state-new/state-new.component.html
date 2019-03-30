@@ -1,0 +1,59 @@
+<div class="body">
+    <form [formGroup]="stateFG">
+      <div class="editor" style="margin:0px">    
+
+          <div class="row">
+            <div class="subpage-title col-12">Estados</div>
+
+            <div class="form-group " class="styleHalfWidth">
+              <label class="bold-content" for="stateIdSelected">Estado Anterior
+                <i class="fa fa-asterisk" aria-hidden="true"></i>
+              </label>
+              <div class="input-group">
+                <select #storeIdselected class="form-control" [formControlName]="'stateIdSelected'" id="stateIdSelected"
+                  autocomplete="off" >
+                  <option *ngFor="let onestate of states" value="{{onestate.Id}}"> {{onestate?.Name}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group " class="styleWidth" >
+                <label class="bold-content" for="Name">Nombre Estado</label>
+                <div class="input-group">
+                    <input  type="text"  [formControlName]="'Name'" 
+                    class="form-control" 
+                    id="Name" autocomplete="off" 
+                    placeholder="Nombre Estado" />
+                </div>
+            </div>
+  
+            <div class="form-group " class="styleWidth" >
+              <label class="bold-content" for="SendNotification">Envia Notificacion?</label>
+              <div class="input-group">
+                  <div class="form-check">
+                      <input class="form-check-input position-static" type="checkbox" id="SendNotification" autocomplete="off" 
+                      placeholder="Envia Notificacion?" [formControlName]="'SendNotification'"  id="blankCheckbox" >
+                  </div>
+              </div>
+          </div>
+
+            <div class="form-group styleWidth buttons">
+                <button id="close" type="button" 
+                  class="btn btn-link nav-item nav-link section-header padding-buttons normalButton" 
+                  (click)="closeNew()">
+                    <i class="fas fa-undo" aria-hidden="true"></i>
+                    <span class="ml-2 hide-by-resolution">Cancelar</span>
+                  </button>              
+                <button id="save" [disabled]="saveDisabled" 
+                  type="button" 
+                  class="btn btn-link nav-item nav-link section-header padding-buttons actionButton" 
+                  (click)="saveClicked()">
+                    <i class="far fa-save" aria-hidden="true"></i>
+                    <span class="ml-2 hide-by-resolution">Crear</span>
+                </button>
+            </div>
+          </div>         
+      </div>
+    </form>
+    
+  </div>

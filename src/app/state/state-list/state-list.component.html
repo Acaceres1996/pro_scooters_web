@@ -1,0 +1,91 @@
+<div class="jumbotron">
+  <h1 class="display-3-rew">Estados</h1>
+</div>
+<section class="form-main-container" [ngClass]="{'loading':loading}">
+  <form [formGroup]="storeFG">
+    <div class="form-group " class="styleHalfWidth">
+      <label class="bold-content" for="storeIdselected">Tienda
+        <i class="fa fa-asterisk" aria-hidden="true"></i>
+      </label>
+      <div class="input-group">
+        <select #storeIdselected class="form-control" [formControlName]="'storeIdselected'" id="storeIdselected"
+          autocomplete="off" (change)="loadStates(storeIdselected.value)">
+          <option *ngFor="let store of tiendas" value="{{store.Id}}"> {{store.Name}}</option>
+        </select>
+      </div>
+    </div>
+  </form>
+
+  <div style="padding:20px;">
+    <button type="button" class="btn btn-info" (click)="newState()">Agregar</button>
+  </div>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Inicial?</th>
+        <th scope="col">Final?</th>
+        <th scope="col">Notifica?</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table-default" *ngFor="let state of states">
+        <td>{{state?.Name}}</td>
+        <td>{{state?.Initial}}</td>
+        <td>{{state?.Final}}</td>
+        <td>{{state?.SendNotification}}</td>
+        <td><button *ngIf="state.StoreId !=0" (click)="edit(state)" type="button" class="btn btn-sm btn-outline-info">Editar</button></td>
+        <td><button *ngIf="state.StoreId !=0" (click)="Delete(state)" type="button" class="btn btn-sm btn-danger">Eliminar</button></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+
+
+<div class="modal" style="display:inline" tabindex="-1" role="dialog" *ngIf="showEdit">
+    <div class="modal-dialog" role="document">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar Estado</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeDialog('')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div>
+
+            <div class="form-group">
+              <label class="col-form-label" for="Nombre">Nombre Estado</label>
+              <input type="text" [(ngModel)]="editedState.Name" class="form-control" placeholder="Nombre Estado" id="Nombre">
+            </div>
+
+            <div class="form-group " class="styleWidth" >
+                <label class="bold-content" for="SendNotification">Envia Notificacion?</label>
+                <div class="input-group">
+                    <div class="form-check">
+                        <input class="form-check-input position-static" *ngIf="editedState.SendNotification==true" [(ngModel)]="editedState.SendNotification" type="checkbox" value="{{editedState.SendNotification}}" id="SendNotification" autocomplete="off" 
+                        placeholder="Envia Notificacion?"   id="blankCheckbox" checked>
+                        <input class="form-check-input position-static" *ngIf="editedState.SendNotification==false" [(ngModel)]="editedState.SendNotification" type="checkbox" value="{{editedState.SendNotification}}" id="SendNotification" autocomplete="off" 
+                        placeholder="Envia Notificacion?"   id="blankCheckbox" >
+                    </div>
+                </div>
+            </div>
+
+              <br>
+            <div class="modal-alert-footer">
+              <button (click)="closeDialog('')" type="button" class="btn btn-danger">
+                Cancelar
+              </button>
+              <button (click)="Update()" [disabled]="saveDisabled" type="button" class="btn btn-success">
+                Actualizar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

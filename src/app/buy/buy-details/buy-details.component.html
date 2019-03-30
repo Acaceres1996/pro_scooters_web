@@ -1,0 +1,50 @@
+<div class="modal-alert" tabindex="-1" role="dialog">
+    <div>
+    <div class="modal-alert-content">
+        <div class="modal-header">
+            <div>
+              <button id="close" type="button"
+                class="btn btn-link nav-item nav-link section-header padding-buttons normalButton"
+                (click)="closePopup()">
+                <i class="fa fa-times icon-button"></i>
+                <span class="ml-2">Cerrar</span>
+              </button>
+            </div>
+          
+            <div class="window-title">{{title}}</div>
+            <div class="title-Buttons select">
+              <select name="slct" id="slct" (change)="changeBuyStateConfirm()" [(ngModel)]="selectedValue">
+                <option *ngFor="let opt of states" value="{{opt.Id}}">{{opt.Name}}</option>
+              </select>
+            </div>
+          </div>
+          
+      <div class="main-content">
+        <div class="title"><h5><span>Estado: </span>{{buy?.StateName}}</h5></div>
+        <div class="title"><h5><span>Direccion: </span>{{buy?.AddressesValue}}</h5></div>
+        <div class="title"><h5><span>Usuario: </span>{{buy?.Name}}</h5></div>
+        <div class="title"><h5><span>Forma de Pago: </span>{{buy?.PaymentOptionName}}</h5></div>
+        <div class="description"><h5><span>Total: </span>{{buy?.TotalValue}}</h5></div>
+        <div class="description"><h5>Hace {{getDateDifference(buy?.Creation)}}</h5></div>
+        <div class="title center"><h4>Detalle Venta</h4></div>
+
+        <div class="container">
+            <ul class="responsive-table">
+              <li class="table-header">
+                <div class="col col-1">Id</div>
+                <div class="col col-2">Nombre</div>
+                <div class="col col-3">Cantidad</div>
+                <div class="col col-4">Precio</div>
+              </li>     
+              <li *ngFor="let item of buy.productList" class="table-row">
+                <div class="col col-1" data-label="Id">{{item.Id}}</div>
+                <div class="col col-2" data-label="Name">{{item.Name}}</div>
+                <div class="col col-3" data-label="Quantity">{{item.Quantity}}</div>
+                <div class="col col-4" data-label="Price">{{item.FinalPricePesos}}</div>
+              </li>       
+            </ul>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

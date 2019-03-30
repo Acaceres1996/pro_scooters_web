@@ -1,0 +1,85 @@
+.radial-chart {
+    width: '40%';
+    height:'40%'
+  }
+  
+  .char-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .chart-text, .circle-number{
+    fill: #000;
+  }
+  
+  .chart-text {
+    transform: translateY(0.25em);
+  }
+  
+  .circle-number{
+    font-size: 0.2em;
+    z-index: 1;
+  }
+  
+  .circle-form {
+    z-index: -1;
+  }
+  
+  .chart-number {
+    font-size: 0.6em;
+    line-height: 1;
+    text-anchor: middle;
+    transform: translateY(-0.25em);
+  }
+  
+  .chart-label {
+    font-size: 0.2em;
+    text-transform: uppercase;
+    text-anchor: middle;
+    -moz-transform: translateY(0.7em);
+    -ms-transform: translateY(0.7em);
+    -webkit-transform: translateY(0.7em);
+    transform: translateY(0.7em);
+  }
+  
+  .donut-reveal {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1.2s ease;
+   }
+  
+   .figure-key {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  .figure-key {
+    min-width: calc(8 / 12);
+  }
+  
+  .figure-key [class*="shape-"] {
+    margin-right: 3px;
+  }
+  
+  .figure-key-list {
+    margin: 0;
+    padding: 5px;
+    list-style: none;
+  }
+  
+  .figure-key-list li {
+    float: left;
+    margin: 0 0 8px;
+    padding-right: 8px;
+  }
+  
+  .shape-circle {
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+  }
+  
+  
