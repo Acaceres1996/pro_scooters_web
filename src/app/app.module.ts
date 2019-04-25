@@ -12,6 +12,7 @@ import { ScanComponent } from './scan/scan.component';
 import { IndexComponent } from './index/index.component';
 import { ReturnComponent } from './paypal/return/return.component';
 import { CancelComponent } from './paypal/cancel/cancel.component';
+import { PaypalComponent } from './paypal/paypal.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { CancelComponent } from './paypal/cancel/cancel.component';
     ScanComponent,
     IndexComponent,
     ReturnComponent,
-    CancelComponent
+    CancelComponent,
+    PaypalComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,7 @@ import { CancelComponent } from './paypal/cancel/cancel.component';
     RouterModule.forRoot([
       {path:'scans', component:ScanComponent},
       {path:'index', component:IndexComponent},
-      {path:'paypal',component: IndexComponent,
+      {path:'paypal',component: PaypalComponent,
       children:[
         {path:'return',component:ReturnComponent},
         {path:'cancel',component:CancelComponent}
