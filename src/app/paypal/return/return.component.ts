@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient,HttpParams } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-return',
@@ -7,7 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReturnComponent implements OnInit {
 
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.queryParams.subscribe(params => {
+          let buyerId = params['BuyerID'];
+          let paymentId = params['paymentId'];
+          console.log(buyerId);
+          console.log(paymentId);
+      });
+  }
 
   ngOnInit() {
   }
