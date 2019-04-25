@@ -29,7 +29,7 @@ import { CancelComponent } from './paypal/cancel/cancel.component';
     RouterModule.forRoot([
       {path:'scans', component:ScanComponent},
       {path:'index', component:IndexComponent},
-      {path:'paypal',redirectTo: '/index', pathMatch: 'full',
+      {path:'paypal',
       children:[
         {path:'return',component:ReturnComponent},
         {path:'cancel',component:CancelComponent}
