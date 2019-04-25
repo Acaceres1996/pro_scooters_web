@@ -10,12 +10,16 @@ import { AppComponent } from './app.component';
 
 import { ScanComponent } from './scan/scan.component';
 import { IndexComponent } from './index/index.component';
+import { ReturnComponent } from './paypal/return/return.component';
+import { CancelComponent } from './paypal/cancel/cancel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ScanComponent,
-    IndexComponent
+    IndexComponent,
+    ReturnComponent,
+    CancelComponent
   ],
   imports: [
     BrowserModule,
@@ -25,6 +29,12 @@ import { IndexComponent } from './index/index.component';
     RouterModule.forRoot([
       {path:'scans', component:ScanComponent},
       {path:'index', component:IndexComponent},
+      {path:'paypal',redirectTo: '/index', pathMatch: 'full',
+      children:[
+        {path:'return',component:ReturnComponent},
+        {path:'cancel',component:CancelComponent}
+      ]},
+      {},
       {path:'', redirectTo: '/index', pathMatch: 'full'}
     ])
   ],
