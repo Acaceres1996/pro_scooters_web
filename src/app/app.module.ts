@@ -31,12 +31,11 @@ import { PaypalComponent } from './paypal/paypal.component';
     RouterModule.forRoot([
       {path:'scans', component:ScanComponent},
       {path:'index', component:IndexComponent},
-      {path:'paypal',component: PaypalComponent,
+      {path:'paypal',
       children:[
         {path:'return',component:ReturnComponent},
         {path:'cancel',component:CancelComponent}
       ]},
-      {},
       {path:'', redirectTo: '/index', pathMatch: 'full'}
     ])
   ],
