@@ -1,4 +1,0 @@
-{
-    "appService.deploySubpath": "dist",
-    "appService.defaultWebAppToDeploy": "/subscriptions/987b2206-a89e-43dd-8c42-86d81fdb2325/resourceGroups/yatelollevo-webapps/providers/Microsoft.Web/sites/backend-yatelollevo"
-}
