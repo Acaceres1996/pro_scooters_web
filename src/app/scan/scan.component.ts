@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ScanService } from '../services/scan.service';
+import { Scan } from '../classes/scan/scan';
 
 @Component({
   selector: 'app-scan',
@@ -9,6 +10,7 @@ import { ScanService } from '../services/scan.service';
 export class ScanComponent implements OnInit {
 
   Scans: any = [];
+  private s : Scan;
 
   constructor(
     public scanAPI:ScanService

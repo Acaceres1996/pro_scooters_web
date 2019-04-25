@@ -1,30 +1,34 @@
-<div class="container custom-container-2">
+<div class="no-data text-center" *ngIf="Scans.length == 0">
+  <p>No hay scans!</p>
+</div>
 
-  <div class="no-data text-center" *ngIf="Scans.length == 0">
-    <p>No hay scans!</p>
-  </div>
-
-  <!-- Employees list table, it hides when there is no employee -->
-  <div *ngIf="Scans.length !== 0">
-    <h3 class="mb-3 text-center">Scan List</h3>
-
-    <div class="col-md-12">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Fecha</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let scan of Scans">
-            <td>{{scan.id}}</td>
-            <td>{{scan.fecha}}</td>
-          </tr>
-        </tbody>
-      </table>
+<!-- Employees list table, it hides when there is no employee -->
+<div *ngIf="Scans.length !== 0">
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Listado de escaneos QR</h1>
+      <p class="lead">(Prueba de conceptos)</p>
     </div>
-
   </div>
-
+  <div class="col-md-12">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Identificador scan</th>
+          <th scope="col">Cliente</th>
+          <th scope="col">Scooter</th>
+          <th scope="col">Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let scan of Scans">
+          <td>{{scan.id}}</td>
+          <td>{{scan.cliente.email}}</td>
+          <td>{{scan.scooter.latitud}}</td>
+          <td>{{scan.scooter.longitud}}</td>
+          <td>{{scan.fecha}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

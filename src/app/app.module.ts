@@ -20,6 +20,7 @@ import { IndexComponent } from './index/index.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     NgbModule.forRoot(),
     RouterModule.forRoot([
       {path:'scans', component:ScanComponent},
