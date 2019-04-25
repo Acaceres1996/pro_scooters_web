@@ -11,9 +11,9 @@ export class ReturnComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute) {
     this.activatedRoute.queryParams.subscribe(params => {
-          let buyerId = params['BuyerID'];
+          let PayerID = params['PayerID'];
           let paymentId = params['paymentId'];
-          console.log(buyerId);
+          console.log(PayerID);
           console.log(paymentId);
       });
   }
