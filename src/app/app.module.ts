@@ -13,6 +13,7 @@ import { IndexComponent } from './index/index.component';
 import { ReturnComponent } from './paypal/return/return.component';
 import { CancelComponent } from './paypal/cancel/cancel.component';
 import { PaypalComponent } from './paypal/paypal.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { PaypalComponent } from './paypal/paypal.component';
     IndexComponent,
     ReturnComponent,
     CancelComponent,
-    PaypalComponent
+    PaypalComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
