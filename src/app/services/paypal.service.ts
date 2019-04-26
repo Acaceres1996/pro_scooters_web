@@ -26,9 +26,15 @@ export class PaypalService {
     )
   }
 
-  finishPayment(paymentId, buyerId){
-    //incompleto
-    this.http.post('https://api.urudin.tk/paypal/finish','',this.httpOptions);
+  finishPayment(paymentId, buyerId) : Observable<>{
+    let body = [];
+    body.push( new Pair("paymentId",paymentId) );
+    body.push( new Pair("BuyerID",buyerId) );
+    return this.http.post('https://api.urudin.tk/paypal/finish',JSON.stringify(body),this.httpOptions)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
   }  
 
   handleError(error) {

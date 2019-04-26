@@ -9,8 +9,6 @@ import { Pair } from '../classes/pair/pair';
 })
 export class PaypalComponent implements OnInit {
 
-  dato : {};
-
   constructor(public PaypalAPI : PaypalService) { }
 
   ngOnInit() {
