@@ -31,7 +31,7 @@ import { PaypalComponent } from './paypal/paypal.component';
     RouterModule.forRoot([
       {path:'scans', component:ScanComponent},
       {path:'index', component:IndexComponent},
-      {path:'paypal',
+      {path:'paypal', component:PaypalComponent,
       children:[
         {path:'return',component:ReturnComponent},
         {path:'cancel',component:CancelComponent}
