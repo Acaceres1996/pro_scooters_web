@@ -19,7 +19,7 @@ export class PaypalService {
   constructor(private http: HttpClient) { }
 
   startPayment(): Observable<Pair>{
-    return this.http.get<Pair>('https://api.urudin.tk/paypal/start')
+    return this.http.post<Pair>('https://api.urudin.tk/paypal/start','',this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
