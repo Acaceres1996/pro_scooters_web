@@ -29,14 +29,31 @@ import { PaypalComponent } from './paypal/paypal.component';
     HttpClientModule,
     NgbModule.forRoot(),
     RouterModule.forRoot([
-      {path:'scans', component:ScanComponent},
-      {path:'index', component:IndexComponent},
-      {path:'paypal', component:PaypalComponent,
-      children:[
-        {path:'return',component:ReturnComponent},
-        {path:'cancel',component:CancelComponent}
-      ]},
-      {path:'', redirectTo: '/index', pathMatch: 'full'}
+      {
+        path: 'scans',
+        component: ScanComponent
+      },
+      {
+        path: 'index',
+        component: IndexComponent
+      },      
+      {
+        path: 'paypal',
+        component: PaypalComponent
+      },
+      {
+        path: 'paypal/cancel',
+        component: CancelComponent
+      },
+      {
+        path: 'paypal/return',
+        component: ReturnComponent
+      },
+      { 
+        path: '', 
+        redirectTo: '/index',
+        pathMatch: 'full' 
+      }
     ])
   ],
   providers: [],
