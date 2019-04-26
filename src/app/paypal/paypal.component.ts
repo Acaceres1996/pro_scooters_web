@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PaypalService } from '../services/paypal.service';
+import { Pair } from '../classes/pair/pair';
 
 @Component({
   selector: 'app-paypal',
@@ -8,7 +9,7 @@ import { PaypalService } from '../services/paypal.service';
 })
 export class PaypalComponent implements OnInit {
 
-  externalURL : string;
+  dato : {};
 
   constructor(public PaypalAPI : PaypalService) { }
 
@@ -16,8 +17,8 @@ export class PaypalComponent implements OnInit {
   }
 
   startPaypalPayment(){
-    this.PaypalAPI.startPayment().subscribe((data:{})=> {
-      console.log( data );
+    this.PaypalAPI.startPayment().subscribe((data:Pair)=> {
+      window.location.href = data.value;
     });
   }
 }
