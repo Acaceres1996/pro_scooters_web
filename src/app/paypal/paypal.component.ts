@@ -18,7 +18,7 @@ export class PaypalComponent implements OnInit {
   startPaypalPayment(){
     this.PaypalAPI.startPayment().subscribe((data:'')=> {
       this.externalURL = data;
+      console.log(data);
     });
-    window.location.href = this.externalURL;
   }
 }
