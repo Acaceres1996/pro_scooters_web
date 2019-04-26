@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import { Pair } from '../classes/pair/pair';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,8 @@ export class PaypalService {
 
   constructor(private http: HttpClient) { }
 
-  startPayment(): Observable<String>{
-    return this.http.get<String>('https://api.urudin.tk/paypal/start')
+  startPayment(): Observable<Pair>{
+    return this.http.get<Pair>('https://api.urudin.tk/paypal/start')
     .pipe(
       retry(1),
       catchError(this.handleError)
