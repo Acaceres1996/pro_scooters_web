@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient,HttpParams } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { PaypalService } from 'src/app/services/paypal.service';
+import { Pair } from 'src/app/classes/pair/pair';
 
 @Component({
   selector: 'app-return',
@@ -14,8 +15,9 @@ export class ReturnComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(params => {
           let PayerID = params['PayerID'];
           let paymentId = params['paymentId'];
-
-          this.paypalAPI.finishPayment(paymentId,PayerID);
+          this.paypalAPI.finishPayment(paymentId,PayerID).subscribe((data:Pair)=> {
+            console.log(data);
+          });
       });
   }
 
