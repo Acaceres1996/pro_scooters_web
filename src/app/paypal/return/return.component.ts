@@ -11,17 +11,21 @@ import { Pair } from 'src/app/classes/pair/pair';
 })
 export class ReturnComponent implements OnInit {
   
+  paymentId : string;
+  PayerID : string;
+
+
   constructor(private activatedRoute: ActivatedRoute, private paypalAPI : PaypalService) {
     this.activatedRoute.queryParams.subscribe(params => {
-          let PayerID = params['PayerID'];
-          let paymentId = params['paymentId'];
-          this.paypalAPI.finishPayment(paymentId,PayerID).subscribe((data:Pair)=> {
-            console.log(data);
-          });
+          this.PayerID = params['PayerID'];
+          this.paymentId = params['paymentId'];
       });
   }
 
   ngOnInit() {
+    this.paypalAPI.finishPayment(this.paymentId,this.PayerID).subscribe((data:Pair)=> {
+      console.log(data);
+    });
   }
 
 }
