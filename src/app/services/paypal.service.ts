@@ -29,11 +29,11 @@ export class PaypalService {
   finishPayment(paymentId, buyerId) : Observable<Pair>{
     let body = [];
     let p = new Pair();
-    p.key = "paymentId";
+    p.key = "paymentid";
     p.value = paymentId;
     body.push( p );
     p = new Pair();
-    p.key = "buyerId";
+    p.key = "buyerid";
     p.value = buyerId;
     body.push( p );
     return this.http.post<Pair>('https://api.urudin.tk/paypal/finish',JSON.stringify(body),this.httpOptions)
