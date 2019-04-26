@@ -19,13 +19,13 @@ export class ReturnComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(params => {
           this.PayerID = params['PayerID'];
           this.paymentId = params['paymentId'];
+          this.paypalAPI.finishPayment(this.paymentId,this.PayerID).subscribe((data:Pair)=> {
+            console.log(data);
+          });
       });
   }
 
-  ngOnInit() {
-    this.paypalAPI.finishPayment(this.paymentId,this.PayerID).subscribe((data:Pair)=> {
-      console.log(data);
-    });
+  ngOnInit() {   
   }
 
 }
