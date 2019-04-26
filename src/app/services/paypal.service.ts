@@ -12,9 +12,10 @@ export class PaypalService {
 
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Accept':'application/json'
     })
-  }  
+  }
 
   constructor(private http: HttpClient) { }
 
@@ -36,12 +37,13 @@ export class PaypalService {
     p.key = "buyerid";
     p.value = buyerId;
     body.push( p );
+    console.log(JSON.stringify(body));
     return this.http.post<Pair>('https://api.urudin.tk/paypal/finish',JSON.stringify(body),this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError)
     );
-  }  
+  }
 
   handleError(error) {
     let errorMessage = '';

@@ -16,7 +16,6 @@ export class ScanService {
   }
 
   getScans(): Observable<Scan> {
-    console.log("Entro a getScans");
     return this.http.get<Scan>(this.apiURL)
     .pipe(
       retry(1),
