@@ -38,6 +38,18 @@ export class ScooterService {
       );
   }
 
+  deleteScooter(id : number): Observable<any>{
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.httpClient.delete<any>( (this.endpoints.getScooterEndpoint + "/" + id) , httpOptions).pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+
   handleError(error) {
     let errorMessage = '';
     if(error.error instanceof ErrorEvent) {
