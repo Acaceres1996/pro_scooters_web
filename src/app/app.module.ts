@@ -10,11 +10,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { ScanComponent } from './admin/scan/scan.component';
-import { IndexComponent } from './admin/index/index.component';
 import { ReturnComponent } from './admin/paypal/return/return.component';
 import { CancelComponent } from './admin/paypal/cancel/cancel.component';
-import { PaypalComponent } from './admin/paypal/paypal.component';
 import { NavbarComponent } from './admin/navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { PaypalService } from './services/paypal/paypal.service';
@@ -23,6 +20,9 @@ import { AdminComponent } from './admin/admin.component';
 import { EndpointmanagerService } from './services/endpoints/endpointmanager.service';
 import { LoginService } from './services/login/login.service';
 import { Authguard } from './services/authguard/authguard';
+import { IndexComponent } from './admin/index/index.component';
+import { ScanComponent } from './admin/scan/scan.component';
+import { PaypalComponent } from './admin/paypal/paypal.component';
 
 const config = new AuthServiceConfig([]);
 
@@ -33,14 +33,14 @@ export function provideConfig() {
 @NgModule({
   declarations: [
     AppComponent,
-    ScanComponent,
-    IndexComponent,
     ReturnComponent,
     CancelComponent,
-    PaypalComponent,
     NavbarComponent,
     LoginComponent,
-    AdminComponent
+    AdminComponent,
+    IndexComponent,
+    PaypalComponent,
+    ScanComponent
   ],
   imports: [
     BrowserModule,
@@ -52,22 +52,12 @@ export function provideConfig() {
     RouterModule.forRoot([
       {
         path: '',
-        redirectTo: '/login',
+        redirectTo: 'admin',
         pathMatch: 'full'
       },
       {
         path: 'login',
         component: LoginComponent
-      },
-      {
-        path: 'admin',
-        component: AdminComponent,
-        canActivate: [Authguard],
-        children: [
-          { path: '', component: IndexComponent, outlet: 'admin_outlet' },
-          { path: 'scans', component: ScanComponent, outlet: 'admin_outlet' },
-          { path: 'paypal', component: PaypalComponent, outlet: 'admin_outlet' }
-        ]
       },
       {
         path: 'paypal/cancel',
@@ -76,7 +66,29 @@ export function provideConfig() {
       {
         path: 'paypal/return',
         component: ReturnComponent
-      }
+      },
+      {
+        path: 'admin',
+        component: AdminComponent,   
+        canActivate: [Authguard],    
+        children: [
+            {
+                path: '',
+                component: IndexComponent,
+                pathMatch: 'full'
+            },
+            {
+                path: 'scans',
+                component: ScanComponent,
+                canActivate: [Authguard],
+            },
+            {
+                path: 'paypal',
+                component: PaypalComponent,
+                canActivate: [Authguard],
+            }
+        ]
+    }
     ])
   ],
   providers: [

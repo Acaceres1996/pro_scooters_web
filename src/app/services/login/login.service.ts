@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Admin } from 'src/app/model/admin/admin';
 import { retry, catchError } from 'rxjs/operators';
 import { EndpointmanagerService } from '../endpoints/endpointmanager.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class LoginService {
@@ -15,7 +16,8 @@ export class LoginService {
 
   constructor(private httpClient: HttpClient,
     private authService: AuthService,
-    private endpoints: EndpointmanagerService) { }
+    private endpoints: EndpointmanagerService,
+    private router : Router) { }
 
   setCurrentUser(user) {
     localStorage.setItem('Admin', JSON.stringify(user));
@@ -45,14 +47,17 @@ export class LoginService {
   }
 
   isLoggedIn(): boolean {
+    this.getCurrentUser();
     return !!this.Admin;
   }
 
   logout(): void {
     this.Admin = null;
+    localStorage.removeItem('Admin');
     if (this.socialUser) {
       this.authService.signOut();
     }
+    this.router.navigate(['/login']);
   }
 
   login(userName: string, password: string): Observable<any> {
@@ -61,21 +66,14 @@ export class LoginService {
         'Content-Type': 'application/json'
       })
     };
-    return this.httpClient.post<any>(this.endpoints.getLogin(), JSON.stringify(this.Admin), httpOptions)
+    let admin = new Admin();
+    admin.email = userName;
+    admin.password = password;
+    return this.httpClient.post<any>(this.endpoints.getLogin(), JSON.stringify(admin), httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
       );
-  }
-
-  getUserByToken(token) {
-    return this.httpClient.get<any>(this.endpoints.getToken(), {
-      headers: new HttpHeaders().set('Content-Type', 'application/json').set('Authorization', 'Bearer ' + token),
-    })
-      .pipe(
-        retry(1),
-        catchError(this.handleError)
-      )
   }
 
   private handleError(err: HttpErrorResponse) {

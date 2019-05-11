@@ -25,16 +25,20 @@ export class LoginComponent implements OnInit {
     this.authService.authState.subscribe((user) => {
       this.user = user;
     });
+    console.log(this.loginService.getCurrentUser());
+    console.log(this.loginService.isLoggedIn());
+    if (this.loginService.isLoggedIn()) {
+      this.router.navigate(['admin']);
+    }
   }
 
   login() {
     this.loginService.login(this.mail, this.password).subscribe(result => {
-      this.loginService.getUserByToken(result.Token).subscribe(user => {
-        let _user = new Adminsession(user);
-        _user.Token = result.Token;
-        this.loginService.setCurrentUser(_user);
-        this.router.navigate(['admin']);
-      });
+      console.log(result);
+      let _user = new Adminsession(result);
+      console.log(_user);
+      this.loginService.setCurrentUser(_user);
+      this.router.navigate(['admin']);
     }, error => {
       console.log(error.message);
     });

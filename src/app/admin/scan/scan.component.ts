@@ -8,7 +8,7 @@ import { Scan } from '../../model/scan/scan';
   styleUrls: ['./scan.component.scss']
 })
 export class ScanComponent implements OnInit {
-
+  
   Scans: any = [];
   private s : Scan;
 

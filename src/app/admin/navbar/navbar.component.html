@@ -7,14 +7,20 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/admin">Principal</a>
+        <a class="nav-link" routerLink="/admin/">Principal</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/admin/scans">Escaneos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/admin/paypal">Paypal</a>
+        <a class="nav-link" routerLink="paypal">Paypal</a>
       </li>
     </ul>
+    <form class="form-inline my-2 my-lg-0">
+        <span class="navbar-text">
+            ¡Bienvenido, {{user.email}}!
+        </span>
+      <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" (click)="logout()">Desconectarse</button>
+    </form>
   </div>
 </nav>

@@ -1,11 +1,10 @@
 export class Adminsession {
     constructor (option = {}) {
-        this.Id = option['Id'] || 0;
-        this.Mail = option['Mail'] || '';
-        this.Token = option['Token'] || '';
+        this.id = option['id'] || 0;
+        this.email = option['email'] || '';
+        this.password = option['password'] || '';
     }
-    Id: number;
-    Mail: string;
-    Pass: string;
-    Token: string;
+    id: number;
+    email: string;
+    password: string;
 }
