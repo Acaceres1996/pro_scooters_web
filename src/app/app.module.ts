@@ -23,6 +23,7 @@ import { Authguard } from './services/authguard/authguard';
 import { IndexComponent } from './admin/index/index.component';
 import { ScanComponent } from './admin/scan/scan.component';
 import { PaypalComponent } from './admin/paypal/paypal.component';
+import { ScootersComponent } from './admin/scooters/scooters.component';
 
 const config = new AuthServiceConfig([]);
 
@@ -40,7 +41,8 @@ export function provideConfig() {
     AdminComponent,
     IndexComponent,
     PaypalComponent,
-    ScanComponent
+    ScanComponent,
+    ScootersComponent
   ],
   imports: [
     BrowserModule,
@@ -78,14 +80,19 @@ export function provideConfig() {
                 pathMatch: 'full'
             },
             {
+              path: 'scooters',
+              component: ScootersComponent,
+              canActivate: [Authguard]
+            },
+            {
                 path: 'scans',
                 component: ScanComponent,
-                canActivate: [Authguard],
+                canActivate: [Authguard]
             },
             {
                 path: 'paypal',
                 component: PaypalComponent,
-                canActivate: [Authguard],
+                canActivate: [Authguard]
             }
         ]
     }

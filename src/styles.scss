@@ -1,6 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 div{
     &.row{
+        .no-data{
+            width:100%;
+        }
         .jumbotron{
             width:100%;
             margin-bottom: 0;
