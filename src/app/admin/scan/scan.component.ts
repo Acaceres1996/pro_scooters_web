@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ScanService } from '../services/scan.service';
-import { Scan } from '../classes/scan/scan';
+import { ScanService } from '../../services/scan/scan.service';
+import { Scan } from '../../model/scan/scan';
 
 @Component({
   selector: 'app-scan',

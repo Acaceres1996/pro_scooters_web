@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { Pair } from '../classes/pair/pair';
+import { Pair } from '../../model/pair/pair';
 
 @Injectable({
   providedIn: 'root'

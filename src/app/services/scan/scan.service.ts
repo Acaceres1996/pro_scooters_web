@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { Scan } from '../classes/scan/scan';
+import { Scan } from '../../model/scan/scan';
 
 @Injectable({
   providedIn: 'root'

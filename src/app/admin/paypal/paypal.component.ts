@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PaypalService } from '../services/paypal.service';
-import { Pair } from '../classes/pair/pair';
+import { PaypalService } from '../../services/paypal/paypal.service';
+import { Pair } from '../../model/pair/pair';
 
 @Component({
   selector: 'app-paypal',

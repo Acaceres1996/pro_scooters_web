@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-4 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h1 class="card-title text-center">Urudin</h1>
+          <form>
+              <hr class="my-4">
+            <div class="form-label-group">
+                <label for="inputEmail">Usuario</label>       
+              <input class="form-control" placeholder="Email address" type="email" name="userEmail" [(ngModel)]="mail" required>              
+            </div>
+            <hr class="my-4">
+            <div class="form-label-group">
+              <label for="inputPassword">Clave</label>
+              <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" [(ngModel)]="password" required>              
+            </div>
+            <hr class="my-4">
+            <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="login()">Iniciar sesion</button>            
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
