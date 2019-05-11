@@ -1,0 +1,49 @@
+<div class=row>
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Administración de scooters</h1>
+    </div>
+  </div>
+</div>
+<div class=row>
+  <div class="no-data text-center" *ngIf="Scooters.length == 0">
+    <p>
+      <ngb-alert [dismissible]="false">
+        <strong>¡Oh, no!</strong> Aun no hay Scooters :(
+      </ngb-alert>
+    </p>
+  </div>
+</div>
+<div *ngIf="Scooters.length !== 0">
+  <div class=row>
+    <div class="card action-group">
+      <div class="card-body">
+        <button type="button" class="btn btn-success" routerLink="/admin/scooters/new">Crear</button>
+      </div>
+    </div>
+  </div>
+  <div class=row>
+    <table class="table">
+      <thead class="thead-light">
+        <tr class="d-flex">
+          <th class="col-3" scope="col">Numero serial</th>
+          <th class="col-3" scope="col">Batería</th>
+          <th class="col-3" scope="col">Ubicación</th>
+          <th class="col-1" scope="col"></th>
+          <th class="col-1" scope="col"></th>
+          <th class="col-1" scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="d-flex" *ngFor="let scooter of Scooters">
+          <td class="col-3">{{scooter.serial}}</td>
+          <td class="col-3">{{scooter.bateria}}</td>
+          <td class="col-3">{{scooter.latitud}},{{scooter.longitud}}</td>
+          <td class="col-1"><button type="button" class="btn btn-primary btn-sm btn-block">Ver</button></td>
+          <td class="col-1"><button type="button" class="btn btn-warning btn-sm btn-block">Modificar</button></td>
+          <td class="col-1"><button type="button" class="btn btn-danger btn-sm btn-block">Eliminar</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

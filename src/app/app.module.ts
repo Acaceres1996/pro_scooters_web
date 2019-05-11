@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthServiceConfig, AuthService } from 'angularx-social-login';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -24,6 +24,8 @@ import { IndexComponent } from './admin/index/index.component';
 import { ScanComponent } from './admin/scan/scan.component';
 import { PaypalComponent } from './admin/paypal/paypal.component';
 import { ScootersComponent } from './admin/scooters/scooters.component';
+import { NewscooterComponent } from './admin/scooters/newscooter/newscooter.component';
+import { ListscootersComponent } from './admin/scooters/listscooters/listscooters.component';
 
 const config = new AuthServiceConfig([]);
 
@@ -42,7 +44,9 @@ export function provideConfig() {
     IndexComponent,
     PaypalComponent,
     ScanComponent,
-    ScootersComponent
+    ScootersComponent,
+    NewscooterComponent,
+    ListscootersComponent
   ],
   imports: [
     BrowserModule,
@@ -71,31 +75,43 @@ export function provideConfig() {
       },
       {
         path: 'admin',
-        component: AdminComponent,   
-        canActivate: [Authguard],    
+        component: AdminComponent,
+        canActivate: [Authguard],
         children: [
-            {
+          {
+            path: '',
+            component: IndexComponent,
+            pathMatch: 'full'
+          },
+          {
+            path: 'scooters',
+            component: ScootersComponent,
+            canActivate: [Authguard],
+            children: [
+              {
                 path: '',
-                component: IndexComponent,
-                pathMatch: 'full'
-            },
-            {
-              path: 'scooters',
-              component: ScootersComponent,
-              canActivate: [Authguard]
-            },
-            {
-                path: 'scans',
-                component: ScanComponent,
+                component: ListscootersComponent,
                 canActivate: [Authguard]
-            },
-            {
-                path: 'paypal',
-                component: PaypalComponent,
+              },
+              {
+                path: 'new',
+                component: NewscooterComponent,
                 canActivate: [Authguard]
-            }
+              },
+            ]
+          },          
+          {
+            path: 'scans',
+            component: ScanComponent,
+            canActivate: [Authguard]
+          },
+          {
+            path: 'paypal',
+            component: PaypalComponent,
+            canActivate: [Authguard]
+          }
         ]
-    }
+      }
     ])
   ],
   providers: [

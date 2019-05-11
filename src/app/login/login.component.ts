@@ -25,8 +25,6 @@ export class LoginComponent implements OnInit {
     this.authService.authState.subscribe((user) => {
       this.user = user;
     });
-    console.log(this.loginService.getCurrentUser());
-    console.log(this.loginService.isLoggedIn());
     if (this.loginService.isLoggedIn()) {
       this.router.navigate(['admin']);
     }

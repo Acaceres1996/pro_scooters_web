@@ -10,3 +10,12 @@ div{
         }
     }
 }
+.action-group{
+    margin: 10px auto;
+    text-align: center;
+    width: calc(100% - 20px);
+    button{
+        margin-left: 5px;
+        margin-right:5px;
+    }
+}

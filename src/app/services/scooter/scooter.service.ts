@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Scooter } from 'src/app/model/scooter/scooter';
 import { Observable, throwError } from 'rxjs';
 import { EndpointmanagerService } from '../endpoints/endpointmanager.service';
@@ -21,6 +21,21 @@ export class ScooterService {
       retry(1),
       catchError(this.handleError)
     )
+  }
+
+  newScooter(serial : string): Observable<any>{
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    let s = new Scooter();
+    s.serial = serial;
+    return this.httpClient.post<any>(this.endpoints.createScooter(), JSON.stringify(s), httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
   }
 
   handleError(error) {

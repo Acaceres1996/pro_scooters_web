@@ -8,20 +8,9 @@ import { ScooterService } from 'src/app/services/scooter/scooter.service';
 })
 export class ScootersComponent implements OnInit {
 
-  Scooters : any = [];
-
-  constructor(
-    private scooterAPI : ScooterService
-  ) { }
+  constructor() { }
 
   ngOnInit() {
-    this.loadScooters();
-  }
-
-  loadScooters(){
-    return this.scooterAPI.getScooters().subscribe((data: {}) => {
-      this.Scooters = data;
-    })
   }
 
 }
