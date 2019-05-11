@@ -29,6 +29,7 @@ export class ReturnComponent implements OnInit {
   finishPayment(){
     this.paypalAPI.finishPayment(this.paymentId,this.PayerID).subscribe((data:Pair)=> {
       console.log(data);
+      console.log("tst");
     });
   }
 
