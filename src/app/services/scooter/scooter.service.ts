@@ -16,7 +16,7 @@ export class ScooterService {
     ) { }
 
   getScooters(): Observable<Scooter>{
-    return this.httpClient.get<Scooter>( this.endpoints.getScooters() )
+    return this.httpClient.get<Scooter>( this.endpoints.getScooterEndpoint() )
     .pipe(
       retry(1),
       catchError(this.handleError)
@@ -31,7 +31,7 @@ export class ScooterService {
     };
     let s = new Scooter();
     s.serial = serial;
-    return this.httpClient.post<any>(this.endpoints.createScooter(), JSON.stringify(s), httpOptions)
+    return this.httpClient.post<any>(this.endpoints.getScooterEndpoint(), JSON.stringify(s), httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
