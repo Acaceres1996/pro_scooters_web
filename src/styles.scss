@@ -1,9 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 div{
     &.row{
+        .no-data{
+            width:100%;
+        }
         .jumbotron{
             width:100%;
             margin-bottom: 0;
         }
+    }
+}
+.action-group{
+    margin: 10px auto;
+    text-align: center;
+    width: calc(100% - 20px);
+    button{
+        margin-left: 5px;
+        margin-right:5px;
     }
 }
