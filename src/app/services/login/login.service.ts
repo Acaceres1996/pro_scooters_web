@@ -58,8 +58,7 @@ export class LoginService {
   login(userName: string, password: string): Observable<any> {
     let httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Content-Type': 'application/json'
       })
     };
     return this.httpClient.post<any>(this.endpoints.getLogin(), JSON.stringify(this.Admin), httpOptions)
