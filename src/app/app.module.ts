@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
 import { AuthServiceConfig, AuthService } from 'angularx-social-login';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -20,6 +20,9 @@ import { LoginComponent } from './login/login.component';
 import { PaypalService } from './services/paypal/paypal.service';
 import { ScanService } from './services/scan/scan.service';
 import { AdminComponent } from './admin/admin.component';
+import { EndpointmanagerService } from './services/endpoints/endpointmanager.service';
+import { LoginService } from './services/login/login.service';
+import { Authguard } from './services/authguard/authguard';
 
 const config = new AuthServiceConfig([]);
 
@@ -44,11 +47,12 @@ export function provideConfig() {
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     NgbModule.forRoot(),
     RouterModule.forRoot([
       {
         path: '',
-        redirectTo: '/admin',
+        redirectTo: '/login',
         pathMatch: 'full'
       },
       {
@@ -58,15 +62,13 @@ export function provideConfig() {
       {
         path: 'admin',
         component: AdminComponent,
-        children: [          
-          { path: '', component: IndexComponent, outlet:'admin_outlet'},
-          {path: 'scans',component: ScanComponent, outlet: 'admin_outlet'},
-          {path: 'paypal',component: PaypalComponent, outlet: 'admin_outlet'}
+        canActivate: [Authguard],
+        children: [
+          { path: '', component: IndexComponent, outlet: 'admin_outlet' },
+          { path: 'scans', component: ScanComponent, outlet: 'admin_outlet' },
+          { path: 'paypal', component: PaypalComponent, outlet: 'admin_outlet' }
         ]
       },
-      
-
-      
       {
         path: 'paypal/cancel',
         component: CancelComponent
@@ -78,10 +80,17 @@ export function provideConfig() {
     ])
   ],
   providers: [
+    EndpointmanagerService,
+    LoginService,
     AuthService,
     PaypalService,
     ScanService,
-    AuthService
+    AuthService,
+    Authguard,
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    }
   ],
   bootstrap: [AppComponent]
 })
