@@ -9,7 +9,7 @@ import { Adminsession } from 'src/app/model/admin/adminsession/adminsession';
 })
 export class NavbarComponent implements OnInit {
 
-  user = Adminsession;
+  user : Adminsession;
 
   constructor(private loginService : LoginService) { }
 
