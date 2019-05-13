@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ScooterService } from 'src/app/services/scooter/scooter.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AlertService } from 'src/app/alert/alert.service';
+import { AlertType } from 'src/app/alert/alert.enum';
 
 @Component({
   selector: 'app-listscooters',
@@ -14,23 +16,36 @@ export class ListscootersComponent implements OnInit {
 
   constructor(
     private scooterAPI : ScooterService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private alertService : AlertService
   ) { }
 
   ngOnInit() {
+    this.alertService.add(AlertType.info, "Cargando...");
     this.loadScooters();
-  }
-
-  delete(){
-    return this.scooterAPI.deleteScooter(this.id).subscribe((data: {}) => {
-      console.log(data);
-    })
   }
 
   loadScooters(){
     return this.scooterAPI.getScooters().subscribe((data: {}) => {
       this.Scooters = data;
-    })
+      this.alertService.clear();
+      if(this.Scooters.length == 0){
+        this.alertService.add(AlertType.warning, "¡No hay scooters!");
+      }
+    }, error => {
+      this.alertService.add(AlertType.error, "Algo ha salido mal. Intentelo de vuelta.");
+      console.log(error);
+    });
+  }
+
+  delete(){
+    return this.scooterAPI.delete(this.id).subscribe((data: {}) => {
+      console.log(data);
+      this.alertService.add(AlertType.success, "El scooter con id "+ this.id +" ha sido eliminado.");
+    }, error => {
+      this.alertService.add(AlertType.error, "Algo ha salido mal. Intentelo de vuelta.");
+      console.log(error);
+    });
   }
 
   open(content,id) {

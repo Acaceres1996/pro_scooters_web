@@ -5,15 +5,6 @@
     </div>
   </div>
 </div>
-<div class=row>
-  <div class="no-data text-center" *ngIf="Scooters.length == 0">
-    <p>
-      <ngb-alert [dismissible]="false">
-        <strong>¡Oh, no!</strong> Aun no hay Scooters :(
-      </ngb-alert>
-    </p>
-  </div>
-</div>
 <div *ngIf="Scooters.length !== 0">
   <div class=row>
     <div class="card action-group">

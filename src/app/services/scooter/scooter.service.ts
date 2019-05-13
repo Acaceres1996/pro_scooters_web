@@ -23,7 +23,7 @@ export class ScooterService {
     )
   }
 
-  newScooter(serial : string): Observable<any>{
+  create(serial : string): Observable<any>{
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -38,13 +38,26 @@ export class ScooterService {
       );
   }
 
-  deleteScooter(id : number): Observable<any>{
+  update(scooter : Scooter) : Observable<any>{
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    return this.httpClient.delete<any>( (this.endpoints.getScooterEndpoint + "/" + id) , httpOptions).pipe(
+    return this.httpClient.put<any>(this.endpoints.getScooterEndpoint() + "/" + scooter.id, JSON.stringify(scooter), httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+
+  delete(id : number): Observable<any>{
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.httpClient.delete<any>( (this.endpoints.getScooterEndpoint() + "/" + id) , httpOptions).pipe(
       retry(1),
       catchError(this.handleError)
     );
@@ -59,7 +72,6 @@ export class ScooterService {
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    window.alert(errorMessage);
     return throwError(errorMessage);
  }
 }

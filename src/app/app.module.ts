@@ -26,6 +26,7 @@ import { PaypalComponent } from './admin/paypal/paypal.component';
 import { ScootersComponent } from './admin/scooters/scooters.component';
 import { NewscooterComponent } from './admin/scooters/newscooter/newscooter.component';
 import { ListscootersComponent } from './admin/scooters/listscooters/listscooters.component';
+import { AlertModule } from './alert/alert.module';
 
 const config = new AuthServiceConfig([]);
 
@@ -46,10 +47,11 @@ export function provideConfig() {
     ScanComponent,
     ScootersComponent,
     NewscooterComponent,
-    ListscootersComponent
+    ListscootersComponent,
   ],
   imports: [
     BrowserModule,
+    AlertModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
@@ -99,7 +101,7 @@ export function provideConfig() {
                 canActivate: [Authguard]
               },
             ]
-          },          
+          },
           {
             path: 'scans',
             component: ScanComponent,
