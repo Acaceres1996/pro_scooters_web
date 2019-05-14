@@ -1,0 +1,7 @@
+<div role="alert" class="alert alert-dismissable
+{{'alert-' + bootstrapStyle}}" [@hideAlert]="hideAlert">
+    <button type="button" class="close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <div class="alerts-msg">{{message}}</div>
+</div>

@@ -15,15 +15,23 @@ export class ScooterService {
     private endpoints : EndpointmanagerService
     ) { }
 
-  getScooters(): Observable<Scooter>{
-    return this.httpClient.get<Scooter>( this.endpoints.getScooters() )
+  list(): Observable<Scooter>{
+    return this.httpClient.get<Scooter>( this.endpoints.getScooterEndpoint() )
     .pipe(
       retry(1),
       catchError(this.handleError)
     )
   }
 
-  newScooter(serial : string): Observable<any>{
+  get(id : string): Observable<Scooter>{
+    return this.httpClient.get<Scooter>( this.endpoints.getScooterEndpoint() + "/" + id )
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
+
+  create(serial : string): Observable<any>{
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -31,11 +39,36 @@ export class ScooterService {
     };
     let s = new Scooter();
     s.serial = serial;
-    return this.httpClient.post<any>(this.endpoints.createScooter(), JSON.stringify(s), httpOptions)
+    return this.httpClient.post<any>(this.endpoints.getScooterEndpoint(), JSON.stringify(s), httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
       );
+  }
+
+  update(scooter : Scooter) : Observable<any>{
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.httpClient.put<any>(this.endpoints.getScooterEndpoint() + "/" + scooter.id, JSON.stringify(scooter), httpOptions)
+      .pipe(
+        retry(1),
+        catchError(this.handleError)
+      );
+  }
+
+  delete(id : number): Observable<any>{
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.httpClient.delete<any>( (this.endpoints.getScooterEndpoint() + "/" + id) , httpOptions).pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
   }
 
   handleError(error) {
@@ -47,7 +80,6 @@ export class ScooterService {
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    window.alert(errorMessage);
     return throwError(errorMessage);
  }
 }

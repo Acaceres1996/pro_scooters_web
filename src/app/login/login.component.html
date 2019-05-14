@@ -6,16 +6,16 @@
           <form>
               <hr class="my-4">
             <div class="form-label-group">
-                <label for="inputEmail">Usuario</label>       
-              <input class="form-control" placeholder="Email address" type="email" name="userEmail" [(ngModel)]="mail" required>              
+                <label for="inputEmail">Usuario</label>
+              <input type="text" class="form-control" placeholder="Email address" type="email" name="userEmail" minlength="3" [(ngModel)]="mail" required>
             </div>
             <hr class="my-4">
             <div class="form-label-group">
               <label for="inputPassword">Clave</label>
-              <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" [(ngModel)]="password" required>              
+              <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" nminlength="3" [(ngModel)]="password" required>
             </div>
             <hr class="my-4">
-            <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="login()">Iniciar sesion</button>            
+            <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="login()">Iniciar sesion</button>
           </form>
         </div>
       </div>

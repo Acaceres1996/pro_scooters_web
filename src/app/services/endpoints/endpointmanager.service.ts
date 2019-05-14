@@ -11,11 +11,12 @@ export class EndpointmanagerService {
     return (this.base + "admin/login");
   }
 
-  getScooters() : string{
-    return (this.base + "scooter")
-  }
-
-  createScooter() : string{
+  getScooterEndpoint(): string{
     return (this.base + "scooter");
   }
+
+  getParameterEndpoint(): string{
+    return (this.base + "parametro");
+  }
 }
+

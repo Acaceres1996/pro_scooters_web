@@ -1,0 +1,28 @@
+<div class=row>
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Administración de parametros</h1>
+    </div>
+  </div>
+</div>
+<div *ngIf="Parameters.length !== 0">
+  <div class=row>
+    <table class="table">
+      <thead class="thead-light">
+        <tr class="d-flex">
+          <th class="col-4" scope="col">Clave</th>
+          <th class="col-7" scope="col">Valor</th>
+          <th class="col-1" scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="d-flex" *ngFor="let parameter of Parameters">
+          <td class="col-4">{{parameter.nombre}}</td>
+          <td class="col-7">{{parameter.valor}}</td>
+          <td class="col-1"><button type="button" class="btn btn-warning btn-sm btn-block"
+              (click)="update(parameter.id)">Modificar</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
