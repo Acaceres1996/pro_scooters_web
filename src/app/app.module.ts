@@ -32,6 +32,10 @@ import { UpdatescooterComponent } from './admin/scooters/updatescooter/updatesco
 import { ParametersComponent } from './admin/parameters/parameters.component';
 import { ListparamsComponent } from './admin/parameters/listparams/listparams.component';
 import { UpdateparamComponent } from './admin/parameters/updateparam/updateparam.component';
+import { UsersComponent } from './admin/users/users.component';
+import { ListusersComponent } from './admin/users/listusers/listusers.component';
+import { RideComponent } from './admin/ride/ride.component';
+import { ListridesComponent } from './admin/ride/listrides/listrides.component';
 
 const config = new AuthServiceConfig([]);
 
@@ -58,7 +62,12 @@ export function provideConfig() {
     ParametersComponent,
     ListparamsComponent,
     UpdateparamComponent,
-  ],
+    UsersComponent,
+    ListusersComponent,
+    RideComponent,
+    RideComponent,
+    ListridesComponent,
+    ],
   imports: [
     BrowserModule,
     AlertModule,
@@ -135,6 +144,30 @@ export function provideConfig() {
                 path:'update/:id',
                 component:UpdateparamComponent,
                 canActivate:[Authguard]
+              }
+            ]
+          },
+          {
+            path:'users',
+            component: UsersComponent,
+            canActivate: [Authguard],
+            children:[
+              {
+                path:'',
+                component:ListusersComponent,
+                canActivate: [Authguard]
+              }
+            ]
+          },
+          {
+            path:'rides',
+            component: RideComponent,
+            canActivate: [Authguard],
+            children:[
+              {
+                path:'',
+                component: ListridesComponent,
+                canActivate: [Authguard]
               }
             ]
           },

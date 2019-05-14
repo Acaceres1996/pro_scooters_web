@@ -33,11 +33,16 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.password.length >= 3 && this.mail.length >= 3) {
       this.loginService.login(this.mail, this.password).subscribe(result => {
-        let _user = new Adminsession(result);
-        console.log(_user);
-        this.loginService.setCurrentUser(_user);
-        this.alertService.clear();
-        this.router.navigate(['admin']);
+        if(result){
+          let _user = new Adminsession(result);
+          console.log(_user);
+          this.loginService.setCurrentUser(_user);
+          this.alertService.clear();
+          this.router.navigate(['admin']);
+        }else{
+          this.alertService.add(AlertType.error, 'Credenciales incorrectas.');
+        }
+
       }, error => {
         this.alertService.add(AlertType.error, 'Algo ha salido mal. Intentelo de vuelta.');
         console.log(error.message);
