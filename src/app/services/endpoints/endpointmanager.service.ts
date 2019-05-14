@@ -18,5 +18,13 @@ export class EndpointmanagerService {
   getParameterEndpoint(): string{
     return (this.base + "parametro");
   }
+
+  getUserEndpoint():string{
+    return (this.base + "cliente");
+  }
+
+  getRideEndpoint():string{
+    return (this.base + "viaje");
+  }
 }
 
