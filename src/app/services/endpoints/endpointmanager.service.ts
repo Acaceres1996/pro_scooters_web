@@ -14,4 +14,9 @@ export class EndpointmanagerService {
   getScooterEndpoint(): string{
     return (this.base + "scooter");
   }
+
+  getParameterEndpoint(): string{
+    return (this.base + "parametro");
+  }
 }
+

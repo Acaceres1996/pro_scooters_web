@@ -30,9 +30,12 @@
           <td class="col-3">{{scooter.serial}}</td>
           <td class="col-3">{{scooter.bateria}}</td>
           <td class="col-3">{{scooter.latitud}},{{scooter.longitud}}</td>
-          <td class="col-1"><button type="button" class="btn btn-primary btn-sm btn-block">Ver</button></td>
-          <td class="col-1"><button type="button" class="btn btn-warning btn-sm btn-block">Modificar</button></td>
-          <td class="col-1"><button type="button" class="btn btn-danger btn-sm btn-block" (click)=open(content,scooter.id)>Eliminar</button></td>
+          <td class="col-1"><button type="button" class="btn btn-primary btn-sm btn-block"
+              (click)="view(scooter.id)">Ver</button></td>
+          <td class="col-1"><button type="button" class="btn btn-warning btn-sm btn-block"
+              (click)="update(scooter.id)">Modificar</button></td>
+          <td class="col-1"><button type="button" class="btn btn-danger btn-sm btn-block"
+              (click)=open(content,scooter.id)>Eliminar</button></td>
         </tr>
       </tbody>
     </table>

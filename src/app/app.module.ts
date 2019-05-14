@@ -27,6 +27,11 @@ import { ScootersComponent } from './admin/scooters/scooters.component';
 import { NewscooterComponent } from './admin/scooters/newscooter/newscooter.component';
 import { ListscootersComponent } from './admin/scooters/listscooters/listscooters.component';
 import { AlertModule } from './alert/alert.module';
+import { ViewscooterComponent } from './admin/scooters/viewscooter/viewscooter.component';
+import { UpdatescooterComponent } from './admin/scooters/updatescooter/updatescooter.component';
+import { ParametersComponent } from './admin/parameters/parameters.component';
+import { ListparamsComponent } from './admin/parameters/listparams/listparams.component';
+import { UpdateparamComponent } from './admin/parameters/updateparam/updateparam.component';
 
 const config = new AuthServiceConfig([]);
 
@@ -48,6 +53,11 @@ export function provideConfig() {
     ScootersComponent,
     NewscooterComponent,
     ListscootersComponent,
+    ViewscooterComponent,
+    UpdatescooterComponent,
+    ParametersComponent,
+    ListparamsComponent,
+    UpdateparamComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,12 +104,38 @@ export function provideConfig() {
                 path: '',
                 component: ListscootersComponent,
                 canActivate: [Authguard]
+              },{
+                path:'view/:id',
+                component: ViewscooterComponent,
+                canActivate: [Authguard]
               },
               {
                 path: 'new',
                 component: NewscooterComponent,
                 canActivate: [Authguard]
               },
+              {
+                path: 'update/:id',
+                component: UpdatescooterComponent,
+                canActivate: [Authguard]
+              }
+            ]
+          },
+          {
+            path:'parameters',
+            component: ParametersComponent,
+            canActivate: [Authguard],
+            children: [
+              {
+                path:'',
+                component:ListparamsComponent,
+                canActivate:[Authguard]
+              },
+              {
+                path:'update/:id',
+                component:UpdateparamComponent,
+                canActivate:[Authguard]
+              }
             ]
           },
           {

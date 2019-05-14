@@ -15,8 +15,16 @@ export class ScooterService {
     private endpoints : EndpointmanagerService
     ) { }
 
-  getScooters(): Observable<Scooter>{
+  list(): Observable<Scooter>{
     return this.httpClient.get<Scooter>( this.endpoints.getScooterEndpoint() )
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
+
+  get(id : string): Observable<Scooter>{
+    return this.httpClient.get<Scooter>( this.endpoints.getScooterEndpoint() + "/" + id )
     .pipe(
       retry(1),
       catchError(this.handleError)
