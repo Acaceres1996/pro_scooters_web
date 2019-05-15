@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login/login.service';
-import { Adminsession } from 'src/app/model/admin/adminsession/adminsession';
+import { Admin } from 'src/app/model/admin/admin';
 
 @Component({
   selector: 'app-navbar',
@@ -9,7 +9,7 @@ import { Adminsession } from 'src/app/model/admin/adminsession/adminsession';
 })
 export class NavbarComponent implements OnInit {
 
-  user : Adminsession;
+  user : Admin;
 
   constructor(private loginService : LoginService) { }
 

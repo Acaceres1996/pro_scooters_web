@@ -1,0 +1,32 @@
+<div class=row>
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Administración de administradores del sistema</h1>
+    </div>
+  </div>
+</div>
+<div class=row>
+    <div class="card action-group">
+      <div class="card-body">
+        <button type="button" class="btn btn-success" routerLink="/admin/administrators/new">Crear</button>
+      </div>
+    </div>
+  </div>
+<div *ngIf="Admins.length !== 0">
+  <div class=row>
+    <table class="table">
+      <thead class="thead-light">
+        <tr class="d-flex">
+          <th class="col-4" scope="col">Identificador</th>
+          <th class="col-8" scope="col">Usuario</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="d-flex" *ngFor="let admin of Admins">
+          <td class="col-4">{{admin.id}}</td>
+          <td class="col-8">{{admin.usuario}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -38,7 +38,7 @@ export class ScooterService {
       })
     };
     let s = new Scooter();
-    s.serial = serial;
+    s.numeroserial = serial;
     return this.httpClient.post<any>(this.endpoints.getScooterEndpoint(), JSON.stringify(s), httpOptions)
       .pipe(
         retry(1),
@@ -52,7 +52,7 @@ export class ScooterService {
         'Content-Type': 'application/json'
       })
     };
-    return this.httpClient.put<any>(this.endpoints.getScooterEndpoint() + "/" + scooter.id, JSON.stringify(scooter), httpOptions)
+    return this.httpClient.put<any>(this.endpoints.getScooterEndpoint(), JSON.stringify(scooter), httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)

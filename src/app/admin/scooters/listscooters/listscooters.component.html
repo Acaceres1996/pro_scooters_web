@@ -18,8 +18,8 @@
       <thead class="thead-light">
         <tr class="d-flex">
           <th class="col-3" scope="col">Numero serial</th>
-          <th class="col-3" scope="col">Batería</th>
-          <th class="col-3" scope="col">Ubicación</th>
+          <th class="col-3" scope="col">Estado</th>
+          <th class="col-3" scope="col">Disponibilidad</th>
           <th class="col-1" scope="col"></th>
           <th class="col-1" scope="col"></th>
           <th class="col-1" scope="col"></th>
@@ -27,15 +27,17 @@
       </thead>
       <tbody>
         <tr class="d-flex" *ngFor="let scooter of Scooters">
-          <td class="col-3">{{scooter.serial}}</td>
-          <td class="col-3">{{scooter.bateria}}</td>
-          <td class="col-3">{{scooter.latitud}},{{scooter.longitud}}</td>
+          <td class="col-3">{{scooter.numeroserial}}</td>
+          <td class="col-3" *ngIf="scooter.encendido">Encendido</td>
+          <td class="col-3" *ngIf="!scooter.encendido">Apagado</td>
+          <td class="col-3" *ngIf="scooter.enuso">En uso</td>
+          <td class="col-3" *ngIf="!scooter.enuso">Disponible</td>
           <td class="col-1"><button type="button" class="btn btn-primary btn-sm btn-block"
               (click)="view(scooter.id)">Ver</button></td>
           <td class="col-1"><button type="button" class="btn btn-warning btn-sm btn-block"
               (click)="update(scooter.id)">Modificar</button></td>
           <td class="col-1"><button type="button" class="btn btn-danger btn-sm btn-block"
-              (click)=open(content,scooter.id)>Eliminar</button></td>
+              (click)=open(content,scooter.id,scooter.encendido)>Eliminar</button></td>
         </tr>
       </tbody>
     </table>

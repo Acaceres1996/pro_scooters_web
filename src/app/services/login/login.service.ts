@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { SocialLoginModule, AuthServiceConfig, AuthService } from 'angularx-social-login';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { Admin } from 'src/app/model/admin/admin';
 import { retry, catchError } from 'rxjs/operators';
 import { EndpointmanagerService } from '../endpoints/endpointmanager.service';
@@ -20,6 +20,7 @@ export class LoginService {
     private router : Router) { }
 
   setCurrentUser(user) {
+    console.log(user);
     localStorage.setItem('Admin', JSON.stringify(user));
     this.Admin = user;
   }
@@ -28,7 +29,6 @@ export class LoginService {
     if (this.Admin) {
       return this.Admin;
     }
-
     const storageUser = localStorage.getItem('Admin');
     if (storageUser) {
       this.Admin = JSON.parse(storageUser);
@@ -67,7 +67,7 @@ export class LoginService {
       })
     };
     let admin = new Admin();
-    admin.email = userName;
+    admin.usuario = userName;
     admin.password = password;
     return this.httpClient.post<any>(this.endpoints.getLogin(), JSON.stringify(admin), httpOptions)
       .pipe(
@@ -76,8 +76,15 @@ export class LoginService {
       );
   }
 
-  private handleError(err: HttpErrorResponse) {
-    console.error(err.message);
-    return Observable.throw(err);
-  }
+  handleError(error) {
+    let errorMessage = '';
+    if(error.error instanceof ErrorEvent) {
+      // Get client-side error
+      errorMessage = error.error.message;
+    } else {
+      // Get server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    return throwError(error);
+ }
 }

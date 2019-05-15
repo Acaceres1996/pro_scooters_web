@@ -1,16 +1,23 @@
 <div class=row>
   <div class="jumbotron jumbotron-fluid">
     <div class="container">
-      <h1 class="display-4">Nuevo scooter - {{scooter.serial}}</h1>
+      <h1 class="display-4">Nuevo scooter - {{scooter.numeroserial}}</h1>
     </div>
   </div>
 </div>
 <div class=row>
   <div class="card" style="width: 18rem;">
     <div class="card-body">
-      <p><strong>Ubicación: </strong> {{scooter.latitud}},{{scooter.longitud}}</p>
-      <p><strong>Bateria: </strong> {{scooter.bateria}}%</p>
-      <p><strong>¿Encendido?: </strong>{{scooter.encendido}}</p>
+      <p>
+        <strong>Estado: </strong>
+        <span *ngIf="scooter.encendido">Encendido</span>
+        <span *ngIf="!scooter.encendido">Apagado</span>
+      </p>
+      <p>
+        <strong>Disponibilidad: </strong>
+        <span *ngIf="scooter.enuso">En uso</span>
+        <span *ngIf="!scooter.enuso">Disponible</span>
+      </p>
     </div>
   </div>
 </div>

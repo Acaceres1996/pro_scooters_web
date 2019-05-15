@@ -1,43 +1,35 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { Parameter } from 'src/app/model/parameter/parameter';
 import { EndpointmanagerService } from '../endpoints/endpointmanager.service';
+import { Observable, throwError } from 'rxjs';
+import { Admin } from '../../model/admin/admin';
 import { retry, catchError } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ParameterService {
+export class AdminService {
 
   constructor(
-    private httpClient : HttpClient,
-    private endpoints : EndpointmanagerService
+    private endpoints : EndpointmanagerService,
+    private httpClient : HttpClient
   ) { }
 
-  list(): Observable<Parameter>{
-    return this.httpClient.get<Parameter>( this.endpoints.getParameterEndpoint() )
+  list(): Observable<Admin>{
+    return this.httpClient.get<Admin>( this.endpoints.getAdminEndpoint() )
     .pipe(
       retry(1),
       catchError(this.handleError)
     )
   }
 
-  get(id : string): Observable<Parameter>{
-    return this.httpClient.get<Parameter>( this.endpoints.getParameterEndpoint() + "/" + id )
-    .pipe(
-      retry(1),
-      catchError(this.handleError)
-    )
-  }
-
-  update(parameter : Parameter) : Observable<any>{
+  create(admin : Admin): Observable<any>{
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    return this.httpClient.put<any>(this.endpoints.getParameterEndpoint(), JSON.stringify(parameter), httpOptions)
+    return this.httpClient.post<any>(this.endpoints.getAdminEndpoint(), JSON.stringify(admin), httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
