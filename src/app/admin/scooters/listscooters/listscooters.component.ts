@@ -4,6 +4,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertService } from 'src/app/alert/alert.service';
 import { AlertType } from 'src/app/alert/alert.enum';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-listscooters',
@@ -12,14 +14,14 @@ import { Router } from '@angular/router';
 })
 export class ListscootersComponent implements OnInit {
 
-  Scooters : any = [];
-  id : number;
+  Scooters: any = [];
+  id: number;
 
   constructor(
-    private scooterAPI : ScooterService,
+    private scooterAPI: ScooterService,
     private modalService: NgbModal,
-    private alertService : AlertService,
-    private router : Router
+    private alertService: AlertService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -27,11 +29,12 @@ export class ListscootersComponent implements OnInit {
     this.loadScooters();
   }
 
-  loadScooters(){
+  loadScooters() {
     return this.scooterAPI.list().subscribe((data: {}) => {
       this.Scooters = data;
       this.alertService.clear();
-      if(this.Scooters.length == 0){
+      console.log(data);
+      if (this.Scooters.length == 0) {
         this.alertService.add(AlertType.warning, "¡No hay scooters!");
       }
     }, error => {
@@ -40,26 +43,30 @@ export class ListscootersComponent implements OnInit {
     });
   }
 
-  view(id){
+  view(id) {
     this.router.navigate(['/admin/scooters/view/' + id]);
   }
 
-  update(id){
+  update(id) {
     this.router.navigate(['/admin/scooters/update/' + id]);
   }
 
-  delete(){
+  delete() {
     return this.scooterAPI.delete(this.id).subscribe((data: {}) => {
       console.log(data);
-      this.alertService.add(AlertType.success, "El scooter con id "+ this.id +" ha sido eliminado.");
+      this.alertService.add(AlertType.success, "El scooter con id " + this.id + " ha sido eliminado.");
     }, error => {
       this.alertService.add(AlertType.error, "Algo ha salido mal. Intentelo de vuelta.");
       console.log(error);
     });
   }
 
-  open(content,id) {
-    this.id = id;
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {}, (reason) => {});
+  open(content, id, encendido) {
+    if (encendido) {
+      this.alertService.add(AlertType.error, "El scooter debe estar apagado para poder ser eliminado.")
+    } else {
+      this.id = id;
+      this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => { }, (reason) => { });
+    }
   }
 }

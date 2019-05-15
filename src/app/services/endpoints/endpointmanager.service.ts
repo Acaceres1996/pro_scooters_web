@@ -11,6 +11,10 @@ export class EndpointmanagerService {
     return (this.base + "admin/login");
   }
 
+  getAdminEndpoint() : string{
+    return (this.base + "admin");
+  }
+
   getScooterEndpoint(): string{
     return (this.base + "scooter");
   }

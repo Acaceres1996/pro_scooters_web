@@ -16,6 +16,9 @@
         <a class="nav-link" routerLink="/admin/parameters">Parametros</a>
       </li>
       <li class="nav-item">
+          <a class="nav-link" routerLink="/admin/administrators">Administradores</a>
+        </li>
+      <li class="nav-item">
         <a class="nav-link" routerLink="/admin/users">Usuarios</a>
       </li>
       <li class="nav-item">
@@ -30,7 +33,7 @@
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <span class="navbar-text">
-        ¡Bienvenido, {{user.email}}!
+        ¡Bienvenido, {{user.usuario}}!
       </span>
       <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" (click)="logout()">Desconectarse</button>
     </form>

@@ -36,6 +36,9 @@ import { UsersComponent } from './admin/users/users.component';
 import { ListusersComponent } from './admin/users/listusers/listusers.component';
 import { RideComponent } from './admin/ride/ride.component';
 import { ListridesComponent } from './admin/ride/listrides/listrides.component';
+import { AdministratorsComponent } from './admin/administrators/administrators.component';
+import { ListadminsComponent } from './admin/administrators/listadmins/listadmins.component';
+import { NewadminComponent } from './admin/administrators/newadmin/newadmin.component';
 
 const config = new AuthServiceConfig([]);
 
@@ -67,6 +70,9 @@ export function provideConfig() {
     RideComponent,
     RideComponent,
     ListridesComponent,
+    AdministratorsComponent,
+    ListadminsComponent,
+    NewadminComponent,
     ],
   imports: [
     BrowserModule,
@@ -156,6 +162,22 @@ export function provideConfig() {
                 path:'',
                 component:ListusersComponent,
                 canActivate: [Authguard]
+              }
+            ]
+          },
+          {
+            path:'administrators',
+            component:AdministratorsComponent,
+            canActivate:[Authguard],
+            children:[
+              {
+                path:'',
+                component:ListadminsComponent,
+                canActivate:[Authguard]
+              },{
+                path:'new',
+                component:NewadminComponent,
+                canActivate:[Authguard]
               }
             ]
           },
