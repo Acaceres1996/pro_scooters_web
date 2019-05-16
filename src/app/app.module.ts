@@ -39,6 +39,9 @@ import { ListridesComponent } from './admin/ride/listrides/listrides.component';
 import { AdministratorsComponent } from './admin/administrators/administrators.component';
 import { ListadminsComponent } from './admin/administrators/listadmins/listadmins.component';
 import { NewadminComponent } from './admin/administrators/newadmin/newadmin.component';
+import { PaymentsComponent } from './admin/payments/payments.component';
+import { ArrendadosComponent } from './admin/scooters/maps/arrendados/arrendados.component';
+import { MapsComponent } from './admin/scooters/maps/maps.component';
 
 const config = new AuthServiceConfig([]);
 
@@ -73,7 +76,10 @@ export function provideConfig() {
     AdministratorsComponent,
     ListadminsComponent,
     NewadminComponent,
-    ],
+    PaymentsComponent,
+    ArrendadosComponent,
+    MapsComponent,
+  ],
   imports: [
     BrowserModule,
     AlertModule,
@@ -119,8 +125,8 @@ export function provideConfig() {
                 path: '',
                 component: ListscootersComponent,
                 canActivate: [Authguard]
-              },{
-                path:'view/:id',
+              }, {
+                path: 'view/:id',
                 component: ViewscooterComponent,
                 canActivate: [Authguard]
               },
@@ -133,64 +139,84 @@ export function provideConfig() {
                 path: 'update/:id',
                 component: UpdatescooterComponent,
                 canActivate: [Authguard]
+              },
+              {
+                path: 'maps',
+                component: MapsComponent,
+                canActivate: [Authguard],
+                children: [
+                  {
+                    path: 'arrendados',
+                    component: ArrendadosComponent,
+                    canActivate: [Authguard]
+                  }
+                ]
               }
             ]
           },
           {
-            path:'parameters',
+            path: 'parameters',
             component: ParametersComponent,
             canActivate: [Authguard],
             children: [
               {
-                path:'',
-                component:ListparamsComponent,
-                canActivate:[Authguard]
+                path: '',
+                component: ListparamsComponent,
+                canActivate: [Authguard]
               },
               {
-                path:'update/:id',
-                component:UpdateparamComponent,
-                canActivate:[Authguard]
-              }
-            ]
-          },
-          {
-            path:'users',
-            component: UsersComponent,
-            canActivate: [Authguard],
-            children:[
-              {
-                path:'',
-                component:ListusersComponent,
+                path: 'update/:id',
+                component: UpdateparamComponent,
                 canActivate: [Authguard]
               }
             ]
           },
           {
-            path:'administrators',
-            component:AdministratorsComponent,
-            canActivate:[Authguard],
-            children:[
+            path: 'users',
+            component: UsersComponent,
+            canActivate: [Authguard],
+            children: [
               {
-                path:'',
-                component:ListadminsComponent,
-                canActivate:[Authguard]
-              },{
-                path:'new',
-                component:NewadminComponent,
-                canActivate:[Authguard]
+                path: '',
+                component: ListusersComponent,
+                canActivate: [Authguard]
               }
             ]
           },
           {
-            path:'rides',
+            path: 'administrators',
+            component: AdministratorsComponent,
+            canActivate: [Authguard],
+            children: [
+              {
+                path: '',
+                component: ListadminsComponent,
+                canActivate: [Authguard]
+              }, {
+                path: 'new',
+                component: NewadminComponent,
+                canActivate: [Authguard]
+              }
+            ]
+          },
+          {
+            path: 'rides',
             component: RideComponent,
             canActivate: [Authguard],
-            children:[
+            children: [
               {
-                path:'',
+                path: '',
                 component: ListridesComponent,
                 canActivate: [Authguard]
               }
+            ]
+          },
+          {
+            path: 'payments',
+            component: PaymentsComponent,
+            canActivate: [Authguard],
+            children: [
+
             ]
           },
           {

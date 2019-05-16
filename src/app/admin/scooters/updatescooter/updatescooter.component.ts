@@ -43,6 +43,9 @@ export class UpdatescooterComponent implements OnInit {
 
   update() {
     console.log(this.scooter);
+    if(!this.scooter.encendido){
+      this.scooter.enuso = false;
+    }
     this.scooterAPI.update(this.scooter).subscribe(result => {
       console.log(result);
       this.alertService.add(AlertType.success, "El scooter " + result.serial + " ha sido modificado.");

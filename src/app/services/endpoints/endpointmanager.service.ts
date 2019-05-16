@@ -19,6 +19,10 @@ export class EndpointmanagerService {
     return (this.base + "scooter");
   }
 
+  getRegisterEndpoint(): string{
+    return (this.base + "scooterhistorico")
+  }
+
   getParameterEndpoint(): string{
     return (this.base + "parametro");
   }

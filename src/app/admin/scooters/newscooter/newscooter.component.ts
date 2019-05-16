@@ -30,8 +30,8 @@ export class NewscooterComponent implements OnInit {
       this.alertService.add(AlertType.success, "El scooter " + this.serial + " ha sido creado.");
       this.router.navigate(['/admin/scooters']);
     }, error => {
-      this.alertService.add(AlertType.error, "Algo ha salido mal. Intentelo de vuelta.");
       console.log(error);
+      this.alertService.add(AlertType.error, "Algo ha salido mal. Intentelo de vuelta.");
     });
   }
 
