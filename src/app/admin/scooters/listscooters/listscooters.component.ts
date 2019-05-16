@@ -4,8 +4,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertService } from 'src/app/alert/alert.service';
 import { AlertType } from 'src/app/alert/alert.enum';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
+import { Register } from 'src/app/model/register/register';
+import { RegisterService } from 'src/app/services/register/register.service';
+import { Scooter } from 'src/app/model/scooter/scooter';
 
 @Component({
   selector: 'app-listscooters',
@@ -21,19 +22,27 @@ export class ListscootersComponent implements OnInit {
     private scooterAPI: ScooterService,
     private modalService: NgbModal,
     private alertService: AlertService,
-    private router: Router
+    private router: Router,
+    private registerAPI: RegisterService
   ) { }
 
   ngOnInit() {
     this.alertService.add(AlertType.info, "Cargando...");
     this.loadScooters();
   }
-
   loadScooters() {
     return this.scooterAPI.list().subscribe((data: {}) => {
       this.Scooters = data;
+      for (let i = 0; i < this.Scooters.length; i++) {
+        this.registerAPI.getScooterInfo(this.Scooters[i].id).subscribe((data: {}) => {
+          this.Scooters[i].scooterhistorico = data;
+        }, error => {
+          this.alertService.add(AlertType.error, "Algo ha salido mal. Intentelo de vuelta.");
+          console.log(error);
+        });
+      }
       this.alertService.clear();
-      console.log(data);
+      console.log(this.Scooters);
       if (this.Scooters.length == 0) {
         this.alertService.add(AlertType.warning, "¡No hay scooters!");
       }
@@ -42,6 +51,7 @@ export class ListscootersComponent implements OnInit {
       console.log(error);
     });
   }
+
 
   view(id) {
     this.router.navigate(['/admin/scooters/view/' + id]);
@@ -55,6 +65,7 @@ export class ListscootersComponent implements OnInit {
     return this.scooterAPI.delete(this.id).subscribe((data: {}) => {
       console.log(data);
       this.alertService.add(AlertType.success, "El scooter con id " + this.id + " ha sido eliminado.");
+      this.ngOnInit();
     }, error => {
       this.alertService.add(AlertType.error, "Algo ha salido mal. Intentelo de vuelta.");
       console.log(error);

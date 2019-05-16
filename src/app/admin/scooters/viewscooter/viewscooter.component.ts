@@ -4,6 +4,7 @@ import { ScooterService } from 'src/app/services/scooter/scooter.service';
 import { Scooter } from 'src/app/model/scooter/scooter';
 import { AlertService } from 'src/app/alert/alert.service';
 import { AlertType } from 'src/app/alert/alert.enum';
+import { RegisterService } from 'src/app/services/register/register.service';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class ViewscooterComponent implements OnInit {
     private route: ActivatedRoute,
     private scooterAPI: ScooterService,
     private alertService: AlertService,
+    private registerAPI: RegisterService
   ) { }
 
   ngOnInit() {
@@ -27,16 +29,22 @@ export class ViewscooterComponent implements OnInit {
     this.setScooter();
   }
 
-  isEncendido(){
+  isEncendido() {
     return this.scooter.encendido;
   }
 
   setScooter() {
-    this.scooterAPI.get( this.id ).subscribe( data =>{
+    this.scooterAPI.get(this.id).subscribe(data => {
       this.scooter = data;
+      this.registerAPI.getScooterInfo(this.id).subscribe(data => {
+        this.scooter.scooterhistorico = data;
+      }, error => {
+        this.alertService.add(AlertType.error, "Algo ha salido mal. Intentelo de vuelta.");
+        console.log(error);
+      });
       console.log(this.scooter);
       this.alertService.clear();
-    },error => {
+    }, error => {
       this.alertService.add(AlertType.error, "Algo ha salido mal. Intentelo de vuelta.");
       console.log(error);
     });

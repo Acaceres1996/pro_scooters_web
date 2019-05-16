@@ -14,7 +14,7 @@ import { AlertType } from 'src/app/alert/alert.enum';
 export class UpdateparamComponent implements OnInit {
 
   public id : string;
-  public parameter : Parameter;
+  public parameter : Parameter = new Parameter();
 
   constructor(
     private route: ActivatedRoute,

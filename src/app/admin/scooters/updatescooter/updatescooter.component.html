@@ -20,7 +20,7 @@
           <option [ngValue]="true">Encendido</option>
         </select>
       </div>
-      <div class="form-group">
+      <div class="form-group" *ngIf="scooter.encendido">
           <label for="estado">Disponibilidad</label>
           <select id="estado" class="form-control" [(ngModel)]="scooter.enuso">
             <option [ngValue]="false">Libre</option>
