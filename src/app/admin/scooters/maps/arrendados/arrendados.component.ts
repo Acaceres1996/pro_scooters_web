@@ -80,7 +80,7 @@ export class ArrendadosComponent implements OnInit {
         "type": "symbol",
         "source": "drone",
         "layout": {
-          "icon-image": "rocket-15",
+          "icon-image": "bicycle-15",
           "text-field": "{linea}",
           "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
           "text-offset": [0, 0.6],
