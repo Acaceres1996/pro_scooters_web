@@ -64,7 +64,34 @@ export class ArrendadosComponent implements OnInit {
         showUserLocation: true
       }
     ));
+    let url = 'http://www.mocky.io/v2/5cddf60c3000003a7de23a2d';
     this.map.on('load', (event) => {
+
+      /* Dinamico */
+      setInterval(
+        () => {
+          this.map.getSource('drone').setData(url);
+        }
+      );
+
+      this.map.addSource('drone', { type: 'geojson', data: url });
+      this.map.addLayer({
+        "id": "drone",
+        "type": "symbol",
+        "source": "drone",
+        "layout": {
+          "icon-image": "rocket-15",
+          "text-field": "{linea}",
+          "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+          "text-offset": [0, 0.6],
+          "text-anchor": "top"
+        }
+      });
+      /* Dinamico */
+
+      /* Puntos fijos
+
+
       for (let i = 0; i < this.Scooters.length; i++) {
         let markerHeight = 40, markerRadius = 10, linearOffset = 25;
         let popupOffsets = {
@@ -81,16 +108,18 @@ export class ArrendadosComponent implements OnInit {
           {
             offset: popupOffsets,
             className: 'mapbox_popup',
-            maxWidth:'100px'
+            maxWidth: '100px'
           })
           .setLngLat([this.Scooters[i].longitud, this.Scooters[i].latitud])
-          .setHTML("<p>Scooter <strong>" + this.Scooters[i].scooter.numeroserial + "</strong></p><p>"+ this.Scooters[i].bateria +"%</p>")
+          .setHTML("<p>Scooter <strong>" + this.Scooters[i].scooter.numeroserial + "</strong></p><p>" + this.Scooters[i].bateria + "%</p>")
           .setMaxWidth("100px")
           .addTo(this.map);
 
         let marker = new mapboxgl.Marker().setLngLat([this.Scooters[i].longitud, this.Scooters[i].latitud]).setPopup(popup).addTo(this.map);
         console.log(marker);
       }
+      */
     });
+
   }
 }
