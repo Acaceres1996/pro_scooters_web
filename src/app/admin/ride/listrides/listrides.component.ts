@@ -10,11 +10,11 @@ import { AlertType } from 'src/app/alert/alert.enum';
 })
 export class ListridesComponent implements OnInit {
 
-  Rides : any = [];
+  Rides: any = [];
 
   constructor(
     private rideAPI: RideService,
-    private alertService : AlertService
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {
@@ -22,13 +22,11 @@ export class ListridesComponent implements OnInit {
     this.loadRides();
   }
 
-  loadRides(){
+  loadRides() {
     return this.rideAPI.list().subscribe((data: {}) => {
       this.Rides = data;
-      console.log();
-
       this.alertService.clear();
-      if(this.Rides.length == 0){
+      if (this.Rides.length == 0) {
         this.alertService.add(AlertType.warning, "¡No hay viajes!");
       }
     }, error => {
@@ -37,8 +35,9 @@ export class ListridesComponent implements OnInit {
     });
   }
 
-  getStringDate(timestamp){
-    return new Date(timestamp * 1000).toLocaleString();
+  getStringDate(timestamp) {
+    let date = new Date(timestamp);
+    return date.toUTCString();
   }
 
 }

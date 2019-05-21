@@ -43,6 +43,7 @@ import { PaymentsComponent } from './admin/payments/payments.component';
 import { ArrendadosComponent } from './admin/scooters/maps/arrendados/arrendados.component';
 import { MapsComponent } from './admin/scooters/maps/maps.component';
 import { DisponiblesComponent } from './admin/scooters/maps/disponibles/disponibles.component';
+import { ApagadosComponent } from './admin/scooters/maps/apagados/apagados.component';
 
 const config = new AuthServiceConfig([]);
 
@@ -81,6 +82,7 @@ export function provideConfig() {
     ArrendadosComponent,
     MapsComponent,
     DisponiblesComponent,
+    ApagadosComponent,
   ],
   imports: [
     BrowserModule,
@@ -155,6 +157,11 @@ export function provideConfig() {
                   {
                     path: 'disponibles',
                     component: DisponiblesComponent,
+                    canActivate: [Authguard]
+                  },
+                  {
+                    path: 'apagados',
+                    component: ApagadosComponent,
                     canActivate: [Authguard]
                   }
                 ]
