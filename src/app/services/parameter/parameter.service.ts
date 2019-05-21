@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { Parameter } from 'src/app/model/parameter/parameter';
 import { EndpointmanagerService } from '../endpoints/endpointmanager.service';
 import { retry, catchError } from 'rxjs/operators';
+import { Pair } from 'src/app/model/pair/pair';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,14 @@ export class ParameterService {
 
   get(id : string): Observable<Parameter>{
     return this.httpClient.get<Parameter>( this.endpoints.getParameterEndpoint() + "/" + id )
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
+
+  getByKey(key:string): Observable<Parameter>{
+    return this.httpClient.get<Parameter>( this.endpoints.getParameterEndpoint() + "/getvaluebyname/?name=" + key )
     .pipe(
       retry(1),
       catchError(this.handleError)
