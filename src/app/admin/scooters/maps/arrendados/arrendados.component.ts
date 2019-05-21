@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
-import { RegisterService } from 'src/app/services/register/register.service';
 import { AlertService } from 'src/app/alert/alert.service';
 import { AlertType } from 'src/app/alert/alert.enum';
+import { EndpointmanagerService } from 'src/app/services/endpoints/endpointmanager.service';
 
 @Component({
   selector: 'app-arrendados',
@@ -11,26 +11,18 @@ import { AlertType } from 'src/app/alert/alert.enum';
 })
 export class ArrendadosComponent implements OnInit {
 
-  Scooters: any = [];
   map: mapboxgl.Map;
   lat = -34.892953;
   lng = -56.165181;
 
-
   constructor(
-    private registerAPI: RegisterService,
+    private endpoints : EndpointmanagerService,
     private alertService: AlertService
   ) { }
 
   ngOnInit() {
+    this.alertService.add(AlertType.info, "Cargando...");
     mapboxgl.accessToken = 'pk.eyJ1IjoiYWNhY2VyZXMiLCJhIjoiY2p2cXU1ODhwMDR3ejN5cW9uejhyeW5uMSJ9.O4BNMFtGRcv-CPOeiT_A8w';
-    this.registerAPI.getDisponibles().subscribe((data: {}) => {
-      this.Scooters = data;
-      console.log(data);
-    }, error => {
-      this.alertService.add(AlertType.error, "Algo ha salido mal. Intentelo de vuelta.");
-      console.log(error);
-    });
     this.initializeMap();
   }
 
@@ -64,7 +56,7 @@ export class ArrendadosComponent implements OnInit {
         showUserLocation: true
       }
     ));
-    let url = 'https://api.urudin.tk/scooter/alquilados';
+    let url = this.endpoints.getScooterEndpoint() + "/alquilados";
     this.map.on('load', (event) => {
 
       /* Dinamico */
@@ -87,7 +79,7 @@ export class ArrendadosComponent implements OnInit {
           "text-anchor": "top"
         }
       });
+      this.alertService.clear();
     });
-
   }
 }
