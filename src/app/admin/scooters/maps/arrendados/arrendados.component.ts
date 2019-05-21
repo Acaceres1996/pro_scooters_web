@@ -64,7 +64,7 @@ export class ArrendadosComponent implements OnInit {
         showUserLocation: true
       }
     ));
-    let url = 'http://www.mocky.io/v2/5cddf60c3000003a7de23a2d';
+    let url = 'https://api.urudin.tk/scooter/alquilados';
     this.map.on('load', (event) => {
 
       /* Dinamico */
@@ -81,44 +81,12 @@ export class ArrendadosComponent implements OnInit {
         "source": "drone",
         "layout": {
           "icon-image": "bicycle-15",
-          "text-field": "{linea}",
+          "text-field": "{id}-{numeroserial}",
           "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
           "text-offset": [0, 0.6],
           "text-anchor": "top"
         }
       });
-      /* Dinamico */
-
-      /* Puntos fijos
-
-
-      for (let i = 0; i < this.Scooters.length; i++) {
-        let markerHeight = 40, markerRadius = 10, linearOffset = 25;
-        let popupOffsets = {
-          'top': [10, 10],
-          'top-left': [0, 0],
-          'top-right': [0, 0],
-          'bottom': [0, -markerHeight],
-          'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-          'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-          'left': [markerRadius, (markerHeight - markerRadius) * -1],
-          'right': [-markerRadius, (markerHeight - markerRadius) * -1]
-        };
-        let popup = new mapboxgl.Popup(
-          {
-            offset: popupOffsets,
-            className: 'mapbox_popup',
-            maxWidth: '100px'
-          })
-          .setLngLat([this.Scooters[i].longitud, this.Scooters[i].latitud])
-          .setHTML("<p>Scooter <strong>" + this.Scooters[i].scooter.numeroserial + "</strong></p><p>" + this.Scooters[i].bateria + "%</p>")
-          .setMaxWidth("100px")
-          .addTo(this.map);
-
-        let marker = new mapboxgl.Marker().setLngLat([this.Scooters[i].longitud, this.Scooters[i].latitud]).setPopup(popup).addTo(this.map);
-        console.log(marker);
-      }
-      */
     });
 
   }
