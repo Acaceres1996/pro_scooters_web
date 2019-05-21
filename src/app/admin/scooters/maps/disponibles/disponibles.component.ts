@@ -3,6 +3,8 @@ import { AlertType } from 'src/app/alert/alert.enum';
 import * as mapboxgl from 'mapbox-gl';
 import { AlertService } from 'src/app/alert/alert.service';
 import { RegisterService } from 'src/app/services/register/register.service';
+import { ParameterService } from 'src/app/services/parameter/parameter.service';
+import { Parameter } from 'src/app/model/parameter/parameter';
 
 @Component({
   selector: 'app-disponibles',
@@ -18,19 +20,20 @@ export class DisponiblesComponent implements OnInit {
 
   constructor(
     private registerAPI: RegisterService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private parameterAPI : ParameterService
   ) { }
 
   ngOnInit() {
     this.alertService.add(AlertType.info, "Cargando...");
-    mapboxgl.accessToken = 'pk.eyJ1IjoiYWNhY2VyZXMiLCJhIjoiY2p2cXU1ODhwMDR3ejN5cW9uejhyeW5uMSJ9.O4BNMFtGRcv-CPOeiT_A8w';
-    this.registerAPI.getDisponibles().subscribe((data: {}) => {
-      this.Scooters = data;
+    this.parameterAPI.getByKey("mapbox_access_token").subscribe((data: Parameter) => {
+      console.log(data);
+      mapboxgl.accessToken = data.valor;
+      this.initializeMap();
     }, error => {
       this.alertService.add(AlertType.error, "Algo ha salido mal. Intentelo de vuelta.");
       console.log(error);
     });
-    this.initializeMap();
   }
 
   initializeMap() {
