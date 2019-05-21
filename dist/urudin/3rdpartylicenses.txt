@@ -160,6 +160,9 @@ PERFORMANCE OF THIS SOFTWARE.
 
 
 
+mapbox-gl
+SEE LICENSE IN LICENSE.txt
+
 rxjs
 Apache-2.0
                                Apache License

@@ -25,6 +25,8 @@ export class ListridesComponent implements OnInit {
   loadRides(){
     return this.rideAPI.list().subscribe((data: {}) => {
       this.Rides = data;
+      console.log();
+
       this.alertService.clear();
       if(this.Rides.length == 0){
         this.alertService.add(AlertType.warning, "¡No hay viajes!");
@@ -33,6 +35,10 @@ export class ListridesComponent implements OnInit {
       this.alertService.add(AlertType.error, "Algo ha salido mal. Intentelo de vuelta.");
       console.log(error);
     });
+  }
+
+  getStringDate(timestamp){
+    return new Date(timestamp * 1000).toLocaleString();
   }
 
 }
