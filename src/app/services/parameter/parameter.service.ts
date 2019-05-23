@@ -33,7 +33,7 @@ export class ParameterService {
   }
 
   getByKey(key:string): Observable<Parameter>{
-    return this.httpClient.get<Parameter>( this.endpoints.getParameterEndpoint() + "/getvaluebyname/?name=" + key )
+    return this.httpClient.get<Parameter>( this.endpoints.getParameterEndpoint() + "/getDTbyname/?name=" + key )
     .pipe(
       retry(1),
       catchError(this.handleError)

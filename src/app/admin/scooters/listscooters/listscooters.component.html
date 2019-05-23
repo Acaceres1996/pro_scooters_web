@@ -44,9 +44,11 @@
           <td class="col-2" *ngIf="!scooter.encendido">-</td>
           <td class="col-2" *ngIf="scooter.encendido && scooter.enuso">En uso</td>
           <td class="col-2" *ngIf="scooter.encendido && !scooter.enuso">Disponible</td>
-
-          <td class="col-1">{{scooter.scooterhistorico.bateria}}%</td>
-          <td class="col-2">{{scooter.scooterhistorico.latitud}},{{scooter.scooterhistorico.longitud}}</td>
+          
+          <td *ngIf="!scooter.scooterhistorico" class="col-1">-</td>
+          <td *ngIf="!scooter.scooterhistorico" class="col-2">-</td>
+          <td *ngIf="scooter.scooterhistorico" class="col-1">{{scooter.scooterhistorico.bateria}}%</td>
+          <td *ngIf="scooter.scooterhistorico" class="col-2">{{scooter.scooterhistorico.latitud}},{{scooter.scooterhistorico.longitud}}</td>
 
           <td class="col-1"><button type="button" class="btn btn-primary btn-sm btn-block"
               (click)="view(scooter.id)">Ver</button></td>
