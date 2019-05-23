@@ -29,6 +29,13 @@ export class DisponiblesComponent implements OnInit {
     this.parameterAPI.getByKey("mapbox_access_token").subscribe((data: Parameter) => {
       console.log(data);
       mapboxgl.accessToken = data.valor;
+      this.registerAPI.getDisponibles().subscribe( (data:{}) => {
+        console.log(data);
+        this.Scooters = data;
+      }, error => {
+        this.alertService.add(AlertType.error, "Algo ha salido mal. Intentelo de vuelta.");
+        console.log(error);
+      });
       this.initializeMap();
     }, error => {
       this.alertService.add(AlertType.error, "Algo ha salido mal. Intentelo de vuelta.");

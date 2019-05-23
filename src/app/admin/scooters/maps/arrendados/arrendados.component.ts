@@ -67,8 +67,6 @@ export class ArrendadosComponent implements OnInit {
     ));
     let url = this.endpoints.getScooterEndpoint() + "/alquilados";
     this.map.on('load', (event) => {
-
-      /* Dinamico */
       setInterval(
         () => {
           this.map.getSource('drone').setData(url);

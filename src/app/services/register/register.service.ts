@@ -31,6 +31,14 @@ export class RegisterService {
     )
   }
 
+  getApagados(): Observable<Register>{
+    return this.httpClient.get<Register>( this.endpoints.getRegisterEndpoint() + "/apagadosbateriabaja")
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }
+
   handleError(error) {
     let errorMessage = '';
     if(error.error instanceof ErrorEvent) {
