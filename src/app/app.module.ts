@@ -21,7 +21,6 @@ import { EndpointmanagerService } from './services/endpoints/endpointmanager.ser
 import { LoginService } from './services/login/login.service';
 import { Authguard } from './services/authguard/authguard';
 import { IndexComponent } from './admin/index/index.component';
-import { ScanComponent } from './admin/scan/scan.component';
 import { PaypalComponent } from './admin/paypal/paypal.component';
 import { ScootersComponent } from './admin/scooters/scooters.component';
 import { NewscooterComponent } from './admin/scooters/newscooter/newscooter.component';
@@ -61,7 +60,6 @@ export function provideConfig() {
     AdminComponent,
     IndexComponent,
     PaypalComponent,
-    ScanComponent,
     ScootersComponent,
     NewscooterComponent,
     ListscootersComponent,
@@ -232,16 +230,6 @@ export function provideConfig() {
             children: [
 
             ]
-          },
-          {
-            path: 'scans',
-            component: ScanComponent,
-            canActivate: [Authguard]
-          },
-          {
-            path: 'paypal',
-            component: PaypalComponent,
-            canActivate: [Authguard]
           }
         ]
       }
