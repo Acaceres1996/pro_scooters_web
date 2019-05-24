@@ -10,20 +10,24 @@
     <table class="table">
       <thead class="thead-light">
         <tr class="d-flex">
-          <th class="col-3" scope="col">Inicio</th>
-          <th class="col-3" scope="col">Fin</th>
-          <th class="col-2" scope="col">Estado</th>
-          <th class="col-2" scope="col">Scooter</th>
           <th class="col-2" scope="col">Usuario</th>
+          <th class="col-2" scope="col">Scooter</th>
+          <th class="col-2" scope="col">Inicio</th>
+          <th class="col-2" scope="col">Fin</th>
+          <th class="col-1" scope="col">Estado</th>
+          <th class="col-1" scope="col">Minutos</th>
+          <th class="col-2" scope="col">Costo total</th>    
         </tr>
       </thead>
       <tbody>
         <tr class="d-flex" *ngFor="let ride of Rides">
-          <td class="col-3">{{getStringDate(ride.fechainicio)}}</td>
-          <td class="col-3">{{getStringDate(ride.fechafin)}}</td>
-          <td class="col-2">{{ride.estado}}</td>
-          <td class="col-2">{{ride.scooter.numeroserial}}</td>
-          <td class="col-2">{{ride.cliente.email}}</td>
+          <td class="col-2">{{ride.mailCliente}}</td>
+          <td class="col-2">{{ride.numeroserial}}</td>
+          <td class="col-2">{{getStringDate(ride.fechainicio)}}</td>
+          <td class="col-2">{{getStringDate(ride.fechafin)}}</td>
+          <td class="col-1">{{ride.estado}}</td>       
+          <td class="col-1">{{ride.minutos}}</td>     
+          <td class="col-2">{{ride.costoTotal}}</td>             
         </tr>
       </tbody>
     </table>
