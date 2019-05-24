@@ -34,5 +34,9 @@ export class EndpointmanagerService {
   getRideEndpoint():string{
     return (this.base + "viaje");
   }
+
+  getNotificationsEndpoint():string{
+    return (this.base + "notificacion");
+  }
 }
 
