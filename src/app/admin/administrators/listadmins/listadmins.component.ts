@@ -16,9 +16,7 @@ export class ListadminsComponent implements OnInit {
 
   constructor(
     private adminAPI: AdminService,
-    private modalService: NgbModal,
-    private alertService: AlertService,
-    private router: Router
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {

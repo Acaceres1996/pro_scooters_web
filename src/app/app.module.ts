@@ -43,6 +43,9 @@ import { ArrendadosComponent } from './admin/scooters/maps/arrendados/arrendados
 import { MapsComponent } from './admin/scooters/maps/maps.component';
 import { DisponiblesComponent } from './admin/scooters/maps/disponibles/disponibles.component';
 import { ApagadosComponent } from './admin/scooters/maps/apagados/apagados.component';
+import { NotificationsComponent } from './admin/notifications/notifications.component';
+import { ListnotificationsComponent } from './admin/notifications/listnotifications/listnotifications.component';
+import { NewnotificationComponent } from './admin/notifications/newnotification/newnotification.component';
 
 const config = new AuthServiceConfig([]);
 
@@ -81,6 +84,9 @@ export function provideConfig() {
     MapsComponent,
     DisponiblesComponent,
     ApagadosComponent,
+    NotificationsComponent,
+    ListnotificationsComponent,
+    NewnotificationComponent,
   ],
   imports: [
     BrowserModule,
@@ -229,6 +235,23 @@ export function provideConfig() {
             canActivate: [Authguard],
             children: [
 
+            ]
+          },
+          {
+            path: 'notifications',
+            component: NotificationsComponent,
+            canActivate: [Authguard],
+            children: [
+              {
+                path: '',
+                component: ListnotificationsComponent,
+                canActivate: [Authguard]
+              },
+              {
+                path:'new',
+                component: NewnotificationComponent,
+                canActivate: [Authguard]
+              }
             ]
           }
         ]

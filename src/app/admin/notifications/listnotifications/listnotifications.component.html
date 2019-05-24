@@ -1,0 +1,37 @@
+<div class=row>
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Administración de notificaciones</h1>
+    </div>
+  </div>
+</div>
+<div class=row>
+    <div class="card action-group">
+      <div class="card-body">
+        <button type="button" class="btn btn-success" routerLink="/admin/notifications/new">Crear masiva</button>
+      </div>
+    </div>
+  </div>
+<div *ngIf="Notifications.length !== 0">
+  <div class=row>
+    <table class="table">
+      <thead class="thead-light">
+        <tr class="d-flex">
+          <th class="col-3" scope="col">Cabezal</th>
+          <th class="col-3" scope="col">Cuerpo</th>
+          <th class="col-3" scope="col">Estado</th>
+          <th class="col-3" scope="col">Tipo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="d-flex" *ngFor="let n of Notifications">
+            <td class="col-3" scope="col">{{n.cabezal}}</td>
+            <td class="col-3" scope="col">{{n.cuerpo}}</td>
+            <td class="col-3" scope="col">{{n.estado}}</td>
+            <td class="col-3" scope="col" *ngIf="n.masiva">Masiva</td>
+            <td class="col-3" scope="col" *ngIf="!n.masiva">Particular</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
