@@ -23,13 +23,13 @@ export class NotificationsService {
       )
   }
 
-  create(n : Notif): Observable<any>{
+  create(n : Notif): Observable<Notif>{
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    return this.httpClient.post<any>(this.endpoints.getNotificationsEndpoint(), JSON.stringify(n), httpOptions)
+    return this.httpClient.post<Notif>(this.endpoints.getNotificationsEndpoint(), JSON.stringify(n), httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
