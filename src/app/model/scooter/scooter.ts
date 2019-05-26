@@ -1,10 +1,13 @@
 import { Register } from '../register/register';
 
 export class Scooter {
-    id : number;
-    numeroserial : string;
+    constructor(){
+        this.scooterhistorico = new Register();
+    }
+    id : Number;
+    numeroserial : String;
     encendido : boolean;
-    enuso: false;
-    eliminado: false;
+    enuso: boolean;
+    eliminado: boolean;
     scooterhistorico : Register;
 }
