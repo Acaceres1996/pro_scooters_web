@@ -10,13 +10,13 @@
     <div class="card-body">
       <form>
         <div class="form-group">
-          <label for="serial">Numerio serial</label>
+          <label for="serial">Numero serial</label>
           <input class="form-control" id="serial" placeholder="Numero serial" name="serial" [(ngModel)]="serial"
             required>
         </div>
         <div class=action-group>
           <button type="submit" class="btn btn-danger" routerLink="/admin/scooters">Cancelar</button>
-          <button type="submit" class="btn btn-success" (click)="open(content)">Crear</button>
+          <button type="submit" class="btn btn-success" [disabled]="serial.length == 0" (click)="open(content)">Crear</button>
         </div>
       </form>
     </div>

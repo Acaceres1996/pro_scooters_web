@@ -97,7 +97,7 @@ export function provideConfig() {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule.forRoot(),
+    NgbModule,
     RouterModule.forRoot([
       {
         path: '',

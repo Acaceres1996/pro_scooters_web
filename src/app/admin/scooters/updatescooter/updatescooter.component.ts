@@ -14,7 +14,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class UpdatescooterComponent implements OnInit {
 
   public id : string;
-  public scooter : Scooter;
+  public scooter : Scooter = new Scooter();
 
   constructor(
     private route: ActivatedRoute,

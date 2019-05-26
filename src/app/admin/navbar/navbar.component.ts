@@ -9,6 +9,7 @@ import { Admin } from 'src/app/model/admin/admin';
 })
 export class NavbarComponent implements OnInit {
 
+  isNavbarCollapsed = true;
   user : Admin;
 
   constructor(private loginService : LoginService) { }

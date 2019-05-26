@@ -31,7 +31,7 @@ export class ScooterService {
     )
   }
 
-  create(serial : string): Observable<any>{
+  create(serial : String): Observable<any>{
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -81,6 +81,6 @@ export class ScooterService {
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    return throwError(errorMessage);
+    return throwError(error);
  }
 }
