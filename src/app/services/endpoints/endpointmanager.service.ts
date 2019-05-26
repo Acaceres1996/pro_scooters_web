@@ -38,5 +38,9 @@ export class EndpointmanagerService {
   getNotificationsEndpoint():string{
     return (this.base + "notificacion");
   }
+
+  getPaymentsEndpoint():string{
+    return (this.base + "monederohistorico");
+  }
 }
 
