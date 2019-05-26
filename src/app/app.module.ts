@@ -46,6 +46,7 @@ import { ApagadosComponent } from './admin/scooters/maps/apagados/apagados.compo
 import { NotificationsComponent } from './admin/notifications/notifications.component';
 import { ListnotificationsComponent } from './admin/notifications/listnotifications/listnotifications.component';
 import { NewnotificationComponent } from './admin/notifications/newnotification/newnotification.component';
+import { ListpaymentsComponent } from './admin/payments/listpayments/listpayments.component';
 
 const config = new AuthServiceConfig([]);
 
@@ -87,6 +88,7 @@ export function provideConfig() {
     NotificationsComponent,
     ListnotificationsComponent,
     NewnotificationComponent,
+    ListpaymentsComponent,
   ],
   imports: [
     BrowserModule,
@@ -234,7 +236,11 @@ export function provideConfig() {
             component: PaymentsComponent,
             canActivate: [Authguard],
             children: [
-
+              {
+                path: '',
+                component: ListpaymentsComponent,
+                canActivate: [Authguard]
+              }
             ]
           },
           {
@@ -248,7 +254,7 @@ export function provideConfig() {
                 canActivate: [Authguard]
               },
               {
-                path:'new',
+                path: 'new',
                 component: NewnotificationComponent,
                 canActivate: [Authguard]
               }

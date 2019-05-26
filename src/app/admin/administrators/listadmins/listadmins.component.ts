@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertService } from 'src/app/alert/alert.service';
-import { Router } from '@angular/router';
 import { AlertType } from 'src/app/alert/alert.enum';
 import { AdminService } from 'src/app/services/admin/admin.service';
 
@@ -26,8 +24,8 @@ export class ListadminsComponent implements OnInit {
 
   loadAdmins(){
     return this.adminAPI.list().subscribe((data: {}) => {
-      this.Admins = data;
       console.log(data);
+      this.Admins = data;      
       this.alertService.clear();
       if (this.Admins.length == 0) {
         this.alertService.add(AlertType.warning, "¡No hay administradores!");
@@ -37,5 +35,4 @@ export class ListadminsComponent implements OnInit {
       console.log(error);
     });
   }
-
 }
