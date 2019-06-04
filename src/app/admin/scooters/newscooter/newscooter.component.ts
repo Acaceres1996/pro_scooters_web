@@ -24,7 +24,7 @@ export class NewscooterComponent implements OnInit {
   ngOnInit() { }
 
   create() {
-    this.alertService.add(AlertType.info, "Cargando...");
+    this.alertService.add(AlertType.info, "Cargando...");    
     this.scooterAPI.create(this.serial).subscribe(
       result => {
         console.log(result);

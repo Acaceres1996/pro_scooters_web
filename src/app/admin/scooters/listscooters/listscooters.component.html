@@ -19,10 +19,22 @@
     </div>
   </div>
   <div class=row>
+    <div class="card action-group">
+      <div class="card-body">
+        <form>
+          <div class="form-group form-inline">
+            Buscar por numero serial: <input name="filter" class="form-control ml-2" type="text" [(ngModel)]="filter" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class=row>
     <table class="table">
       <thead class="thead-light">
         <tr class="d-flex">
-          <th class="col-2" scope="col">Numero serial</th>
+          <th class="col-1" scope="col">Identificador</th>
+          <th class="col-1" scope="col">Numero serial</th>
           <th class="col-2" scope="col">Estado</th>
           <th class="col-2" scope="col">Disponibilidad</th>
           <th class="col-1" scope="col">Bateria restante</th>
@@ -33,8 +45,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="d-flex" *ngFor="let scooter of Scooters">
-          <td class="col-2">{{scooter.numeroserial}}</td>
+        <tr class="d-flex" *ngFor="let scooter of Scooters | serialpipe:filter">
+          <td class="col-1">{{scooter.id}}</td>
+          <td class="col-1">{{scooter.numeroserial}}</td>
 
           <!--Los estados-->
           <td class="col-2" *ngIf="scooter.encendido">Encendido</td>
@@ -44,11 +57,12 @@
           <td class="col-2" *ngIf="!scooter.encendido">-</td>
           <td class="col-2" *ngIf="scooter.encendido && scooter.enuso">En uso</td>
           <td class="col-2" *ngIf="scooter.encendido && !scooter.enuso">Disponible</td>
-          
+
           <td *ngIf="!scooter.scooterhistorico" class="col-1">-</td>
           <td *ngIf="!scooter.scooterhistorico" class="col-2">-</td>
           <td *ngIf="scooter.scooterhistorico" class="col-1">{{scooter.scooterhistorico.bateria}}%</td>
-          <td *ngIf="scooter.scooterhistorico" class="col-2">{{scooter.scooterhistorico.latitud}},{{scooter.scooterhistorico.longitud}}</td>
+          <td *ngIf="scooter.scooterhistorico" class="col-2">
+            {{scooter.scooterhistorico.latitud}},{{scooter.scooterhistorico.longitud}}</td>
 
           <td class="col-1"><button type="button" class="btn btn-primary btn-sm btn-block"
               (click)="view(scooter.id)">Ver</button></td>

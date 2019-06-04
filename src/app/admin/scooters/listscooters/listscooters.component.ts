@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, PipeTransform } from '@angular/core';
 import { ScooterService } from 'src/app/services/scooter/scooter.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertService } from 'src/app/alert/alert.service';
 import { AlertType } from 'src/app/alert/alert.enum';
 import { Router } from '@angular/router';
-import { Register } from 'src/app/model/register/register';
 import { RegisterService } from 'src/app/services/register/register.service';
-import { Scooter } from 'src/app/model/scooter/scooter';
 
 @Component({
   selector: 'app-listscooters',
@@ -17,6 +15,7 @@ export class ListscootersComponent implements OnInit {
 
   Scooters: any = [];
   id: number;
+  filter: String;
 
   constructor(
     private scooterAPI: ScooterService,
@@ -63,8 +62,7 @@ export class ListscootersComponent implements OnInit {
 
   delete() {
     return this.scooterAPI.delete(this.id).subscribe((data: {}) => {
-      console.log(data);
-      this.alertService.add(AlertType.success, "El scooter con id " + this.id + " ha sido eliminado.");
+      console.log(data);      
       this.ngOnInit();
     }, error => {
       this.alertService.add(AlertType.error, "Algo ha salido mal. Intentelo de vuelta.");

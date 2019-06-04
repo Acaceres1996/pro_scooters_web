@@ -37,6 +37,7 @@ export class AdminService {
   }
 
   handleError(error) {
+    console.log(error);
     let errorMessage = '';
     if(error.error instanceof ErrorEvent) {
       // Get client-side error
@@ -45,6 +46,6 @@ export class AdminService {
       // Get server-side error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-    return throwError(errorMessage);
+    return throwError(error);
  }
 }
