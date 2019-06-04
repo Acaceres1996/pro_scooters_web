@@ -4,6 +4,7 @@ import { Scooter } from 'src/app/model/scooter/scooter';
 import { Observable, throwError } from 'rxjs';
 import { EndpointmanagerService } from '../endpoints/endpointmanager.service';
 import { retry, catchError } from 'rxjs/operators';
+import { NewScooter } from 'src/app/model/scooter/new/newscooter';
 
 @Injectable({
   providedIn: 'root'
@@ -37,8 +38,9 @@ export class ScooterService {
         'Content-Type': 'application/json'
       })
     };
-    let s = new Scooter();
+    let s = new NewScooter();
     s.numeroserial = serial;
+    console.log(s);
     return this.httpClient.post<any>(this.endpoints.getScooterEndpoint(), JSON.stringify(s), httpOptions)
       .pipe(
         retry(1),

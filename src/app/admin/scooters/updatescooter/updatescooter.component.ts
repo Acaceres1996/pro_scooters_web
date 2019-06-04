@@ -13,8 +13,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class UpdatescooterComponent implements OnInit {
 
-  public id : string;
-  public scooter : Scooter = new Scooter();
+  public id: string;
+  public scooter: Scooter = new Scooter();
 
   constructor(
     private route: ActivatedRoute,
@@ -22,7 +22,7 @@ export class UpdatescooterComponent implements OnInit {
     private alertService: AlertService,
     private modalService: NgbModal,
     private router: Router
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.alertService.add(AlertType.info, "Cargando...");
@@ -31,33 +31,42 @@ export class UpdatescooterComponent implements OnInit {
   }
 
   setScooter() {
-    this.scooterAPI.get( this.id ).subscribe( data =>{
-      this.scooter = data;
+    this.scooterAPI.get(this.id).subscribe(data => {
+      this.scooter = data;     
       console.log(this.scooter);
       this.alertService.clear();
-    },error => {
+    }, error => {
       this.alertService.add(AlertType.error, "Algo ha salido mal. Intentelo de vuelta.");
       console.log(error);
     });
   };
 
   update() {
-    console.log(this.scooter);
-    if(!this.scooter.encendido){
+    if (!this.scooter.encendido) {
       this.scooter.enuso = false;
     }
-    this.scooterAPI.update(this.scooter).subscribe(result => {
-      console.log(result);
-      this.alertService.add(AlertType.success, "El scooter " + result.serial + " ha sido modificado.");
-      this.router.navigate(['/admin/scooters']);
-    }, error => {
-      this.alertService.add(AlertType.error, "Algo ha salido mal. Intentelo de vuelta.");
-      console.log(error);
-    });
+    if (this.scooter.numeroserial.trim() == "") {
+      this.alertService.add(AlertType.warning, "El número serial indicado no es correcto.")
+    } else {
+      this.scooterAPI.update(this.scooter).subscribe(
+        result => {
+          console.log(result);
+          this.alertService.add(AlertType.success, "El scooter " + result.serial + " ha sido modificado.");
+          this.router.navigate(['/admin/scooters']);
+        },
+        error => {
+          if (error.error.message.includes("RollbackException")) {
+            this.alertService.add(AlertType.error, "El número serial indicado no es correcto.");
+          } else {
+            this.alertService.add(AlertType.error, "Algo ha salido mal. Intentelo de vuelta.");
+          }
+        }
+      );
+    }
   }
 
   open(content) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {}, (reason) => {});
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => { }, (reason) => { });
   }
 
 }

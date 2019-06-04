@@ -47,6 +47,8 @@ import { NotificationsComponent } from './admin/notifications/notifications.comp
 import { ListnotificationsComponent } from './admin/notifications/listnotifications/listnotifications.component';
 import { NewnotificationComponent } from './admin/notifications/newnotification/newnotification.component';
 import { ListpaymentsComponent } from './admin/payments/listpayments/listpayments.component';
+import { SerialpipePipe } from './admin/scooters/listscooters/serialpipe.pipe';
+import { EmailpipePipe } from './admin/users/listusers/emailpipe.pipe';
 
 const config = new AuthServiceConfig([]);
 
@@ -89,6 +91,8 @@ export function provideConfig() {
     ListnotificationsComponent,
     NewnotificationComponent,
     ListpaymentsComponent,
+    SerialpipePipe,
+    EmailpipePipe,
   ],
   imports: [
     BrowserModule,

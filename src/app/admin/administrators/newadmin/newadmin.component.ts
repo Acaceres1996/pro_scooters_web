@@ -26,13 +26,13 @@ export class NewadminComponent implements OnInit {
   }
 
   create() {
+    this.alertService.add(AlertType.info, "Cargando...");
     this.adminAPI.create(this.admin).subscribe(result => {
       console.log(result);
       this.alertService.add(AlertType.success, "El administrador ha sido creado.");
       this.router.navigate(['/admin/administrators']);
     }, error => {
-      this.alertService.add(AlertType.error, "Algo ha salido mal. Intentelo de vuelta.");
-      console.log(error);
+      this.alertService.add(AlertType.error, "No se pudo crear administrador. Ya existe otro con el mismo nombre.");
     });
   }
 
